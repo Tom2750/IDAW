@@ -1,3 +1,16 @@
-.orange{
-    color: orange;
+body {
+    margin: 0;
+}
+
+h1{
+    text-align: center;
+    text-shadow: -5px 2px 1px blue;
+}
+
+.pp{
+    text-align: end;
+}
+
+.vert{
+    color: greenyellow;
 }
