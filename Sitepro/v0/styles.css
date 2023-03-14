@@ -1,0 +1,30 @@
+body {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 12px;
+    background: beige;
+    color: black;
+    margin: 0 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    text-shadow: -5px 2px 1px blue;
+}
+
+.textePP{
+    text-align: end;
+}
+
+.vert{
+    color: greenyellow;
+}
+
+.navi{
+    background-color: aqua;
+    width: 400px;
+}
+
+.selected{
+    color: blueviolet;
+}
