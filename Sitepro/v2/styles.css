@@ -14,17 +14,18 @@ h1{
 
 .presentation{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .pp{
     max-width: 10%;
     max-height: 10%;
-    margin: auto;
 }
 
 .textPP{
-    margin: auto;
+    margin: 0;
 }
 
 .selected{

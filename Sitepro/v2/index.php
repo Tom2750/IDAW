@@ -10,6 +10,7 @@
     </header>
     <?php
         require_once('template_menu.php');
+        renderMenuToHTML('index');
     ?>
     <div>
        <p>Bienvenue sur la page d'accueil ! Ici vous pouvez accéder à mon cv et à mes hobbies</p>
