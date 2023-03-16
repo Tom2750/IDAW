@@ -4,8 +4,8 @@
     <header>
         <h1>Accueil</h1>
         <div class="presentation">
-            <img src="../images/photo de profil.jpg" class="pp">
-            <p class="textePP">Beau gosse ?</p>
+            <img class="pp" src="../images/photo de profil.jpg">
+            <p>Beau gosse ?</p>
         </div>
     </header>
     <?php

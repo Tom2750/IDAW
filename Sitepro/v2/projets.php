@@ -10,6 +10,7 @@
     </header>
 <?php
     require_once('template_menu.php');
+    renderMenuToHTML('projets');
 ?>
     <div>
        <p>Ici je vous parle de mes projets</p>
