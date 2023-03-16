@@ -4,14 +4,14 @@
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
                     <h1 class="mb-0">
-                        Jean
-                        <span class="text-primary">Robert</span>
+                        Informations
+                        <span class="text-primary">Techniques</span>
                     </h1>
                     <div class="subheading mb-5">
-                        33 boulevard de la République
-                        <a href="mailto:name@email.com">jeanrobert@gmail.com</a>
+                        
+                        <a href="mailto:name@email.com">tom.nguyen-cadoret@€tu.imt-nord-europe.fr</a>
                     </div>
-                    <p class="lead mb-5">C'est les infos-techniques</p>
+                    <p class="lead mb-5">Comptétences en développement, réseaux et fibres optiques</p>
                 </div>
             </section>
         </div>

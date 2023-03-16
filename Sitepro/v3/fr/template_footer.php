@@ -1,5 +1,5 @@
     </body>
     <footer>
-        Contactez moi à l'adresse mail : adresse@gmail.com
+        Créé avec Bootstrap.
     </footer>
 </html>

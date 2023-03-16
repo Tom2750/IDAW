@@ -4,14 +4,14 @@
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
                     <h1 class="mb-0">
-                        Jean
-                        <span class="text-primary">Robert</span>
+                        Les
+                        <span class="text-primary">Projets</span>
                     </h1>
                     <div class="subheading mb-5">
-                        33 boulevard de la République
-                        <a href="mailto:name@email.com">jeanrobert@gmail.com</a>
+                        
+                        <a href="mailto:name@email.com">tom.nguyen-cadoret@etu.imt-nord-europe.fr</a>
                     </div>
-                    <p class="lead mb-5">C'est les projets</p>
+                    <p class="lead mb-5">Created a game using Pharo<br>Created a game using C<br>Case study and creation of a business network<br>This website<br>Creation of a rest api using go</p>
                 </div>
             </section>
         </div>
