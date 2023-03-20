@@ -1,47 +1,29 @@
-<?php
-    require_once('config.php');
-    $connectionString = "mysql:host=". _MYSQL_HOST;
-    if(defined('_MYSQL_PORT')) {
-        $connectionString .= ";port=". _MYSQL_PORT;
-    }
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users</title>
+        <meta charset="utf-8">
+    </head>
 
-    $connectionString .= ";dbname=" . _MYSQL_DBNAME;
-    $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' );
+    <form id="login_form" action="updated_user.php" method="POST">
+        <table>
+            <tr>
+                <th>Login :</th>
+                <td><input type="text" name="login"></td>
+            </tr>
+            <tr>
+                <th>Mail :</th>
+                <td><input type="text" name="mail"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Ajouter" /></td>
+            </tr>
+        </table>
+        <?php
+            echo '<input type="hidden" id="postId" name="postId" value='.$_POST['postId'].'>'
+        ?>
 
-    try {
-        $pdo = new PDO($connectionString,_MYSQL_USER,_MYSQL_PASSWORD,$options);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-    catch (PDOException $erreur) {
-        myLog('Erreur : '.$erreur->getMessage());
-    }
-    
-    /* Update login */
-    $request = $pdo->prepare("
-                UPDATE Users
-                SET Login=:login
-                WHERE id=:id
-  ");
+    </form>
 
-    $id = $_POST['id']; $login = $_POST['login'];
-    $request->bindParam(':id', $id);
-    $request->bindParam(':login', $login);
-
-    $request->execute();
-
-    /* Update mail */
-    $request = $pdo->prepare("
-                UPDATE Users
-                SET Mail=:mail
-                WHERE id=:id
-    ");
-
-    $id = $_POST['id']; $mail = $_POST['mail'];
-    $request->bindParam(':id', $id);
-    $request->bindParam(':mail', $mail);
-
-    $request->execute();
-
-    echo '<h1>Utilisateur mis à jour!</h1><br>';
-    echo '<a href="users.php">Liste des utilisateurs</a><br>';
-?>
+</html>
