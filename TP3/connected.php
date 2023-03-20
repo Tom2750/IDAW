@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // on simule une base de données
     $users = array(
         // login => password
@@ -21,9 +22,13 @@
     if(!$successfullyLogged) {
         echo $errorText;
     } else {
-        session_start();
         $_SESSION['login'] = $login;
         setcookie('login', $login);
-        echo "<h1>Bienvenu ".$login."</h1>";
+        echo "<h1>Bienvenu ".$login."</h1><br>";
+        
+        echo "<a href='choix_style.php'>choix du style</a><br>";
+        echo '<a href="logout.php">Déconnexion</a>';
     }
+    session_unset();
+    session_destroy();
 ?>

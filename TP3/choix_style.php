@@ -17,3 +17,12 @@
     </select>
     <input type="submit" value="Appliquer" />
 </form>
+
+<?php
+    if(isset($_COOKIE['login'])){
+        $login = $_COOKIE['login'];
+        echo "<h1>Bienvenu ".$login."</h1><br>";
+        setcookie('login',$login);
+        echo '<a href="logout.php">Déconnexion</a>';
+    }
+?>
