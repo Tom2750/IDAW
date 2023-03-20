@@ -41,7 +41,14 @@
     $request->bindParam(':mail', $mail);
 
     $request->execute();
-
-    echo '<h1>Utilisateur mis à jour!</h1><br>';
-    echo '<a href="users.php">Liste des utilisateurs</a><br>';
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users</title>
+        <meta charset="utf-8">
+    </head>
+    <h1>Utilisateur mis à jour!<br></h1>
+    <a href="users.php">Retour à la liste des utilisateurs</a><br>
+</html>

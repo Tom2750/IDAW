@@ -32,27 +32,34 @@
         <meta charset="utf-8">
     </head>
     <h1>Users</h1>
-    <a>
-        ID | Login | Mail <br><br>
+    <table>
+        <tr><th>ID</th><th>Login</th><th>Mail</th><th>Update</th><th>Delete</th></tr>
         <?php
             foreach($resultat as $key => $colonne){
+                echo '<tr>';
                 foreach($colonne as $value){
+                    echo '<th>';
                     echo $value;
-                    echo '-----';
+                    echo '</th>';
                 }
+                echo '<th>';
                 echo '<form action="update_user.php" method="POST">
                         <button type="submit">Modifier</button>
                         <input type="hidden" id="postId" name="postId" value='.($key+1).'>
                       </form>';
+                echo '</th>';
+                echo '<th>';
                 echo '<form action="deleted_user.php" method="POST">
                       <button type="submit">Supprimer</button>
                       <input type="hidden" id="postId" name="postId" value='.($key+1).'>
                     </form>';
-                echo '<br>';
+                echo '</th>';
             }
+            echo '</tr>';
         ?>
-        <br><br>
-    </a>
+    </table>
+    
+    <br><br>
 
     <form id="login_form" action="create_user.php" method="POST">
         <table>

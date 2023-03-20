@@ -20,10 +20,10 @@
                 <td><input type="submit" value="Ajouter" /></td>
             </tr>
         </table>
+        
         <?php
             echo '<input type="hidden" id="postId" name="postId" value='.$_POST['postId'].'>'
         ?>
 
     </form>
-
 </html>
