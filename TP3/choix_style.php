@@ -10,7 +10,7 @@
     }
 ?>
 
-<form id="style_form" action="index.php" method="GET">
+<form id="style_form" action="choix_style.php" method="GET">
     <select name="css">
         <option value="style1">style1</option>
         <option value="style2">style2</option>
