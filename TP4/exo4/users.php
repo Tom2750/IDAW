@@ -45,13 +45,13 @@
                 echo '<th>';
                 echo '<form action="update_user.php" method="POST">
                         <button type="submit">Modifier</button>
-                        <input type="hidden" id="postId" name="postId" value='.($key+1).'>
+                        <input type="hidden" id="postId" name="postId" value='.$colonne->id.'>
                       </form>';
                 echo '</th>';
                 echo '<th>';
                 echo '<form action="deleted_user.php" method="POST">
                       <button type="submit">Supprimer</button>
-                      <input type="hidden" id="postId" name="postId" value='.($key+1).'>
+                      <input type="hidden" id="postId" name="postId" value='.$colonne->id.'>
                     </form>';
                 echo '</th>';
             }
