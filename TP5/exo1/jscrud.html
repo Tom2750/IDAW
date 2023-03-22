@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset='utf-8'>
+        <!-- <link rel="stylesheet" href="styles.css"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <title>tabletest</title>
@@ -70,9 +71,9 @@
                 event.preventDefault();
                 let nom = $("#inputNom").val();
                 let prenom = $("#inputPrenom").val();
-                let date = $("inputDate").val();
-                let adore = $("inputAdore").val();
-                let remarques = $("inputRemarques").val();
+                let date = $("#inputDate").val();
+                let adore = $("#inputAdore").prop("checked") ? "Oui" : "Non";
+                let remarques = $("#inputRemarques").val();
                 
                 $("#studentsTableBody").append(`<tr><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${adore}</td><td>${remarques}</td><td></td><td></td></tr>`);
             }
