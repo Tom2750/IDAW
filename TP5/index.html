@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            //<![CDATA[
+            function displayError(address,form) {
+                var errordiv = document.getElementById('errordiv');
+                if( errordiv == null ) {
+                    errordiv=document.createElement("div");
+                    errordiv.id='errordiv';
+                    errordiv.className='error';
+                    form.appendChild(errordiv);
+                }
+                errordiv.innerHTML = address + " : email non valide";
+            }
+            function validate(form) {
+                var reg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                var address = form.email.value;
+                if(!reg.test(address)) {
+                    displayError(address,form);
+                    return false;
+                }
+                return true;
+            }
+            //]]>
+        </script>
+        <style>
+            .error{ color:red; }
+        </style>
+    </head>
+        <body>
+            <form id="form_id" method="post" action='<?php echo $_SERVER[’PHP_SELF’]; ?>' onsubmit="return validate(this);">
+                <input type="text" id="email" name="email" />
+                <input type="submit" value="Submit" />
+            </form>
+    </body>
+</html>
