@@ -2,17 +2,17 @@
 <html lang="fr">
     <head>
         <meta charset='utf-8'>
-        <!-- <link rel="stylesheet" href="styles.css"> -->
+        <link rel="stylesheet" href="style1.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <title>tabletest</title>
-        <style>
+        <!-- <style>
             body{ margin-top: 5em; }
             .table {
             margin-top: 100px;
             margin-bottom: 100px;
             }
-        </style>
+        </style> -->
     </head>
     <body>
         <table class="table">
@@ -23,7 +23,8 @@
                     <th scope="col">Date de naissance</th>
                     <th scope="col">Aime le cours Web</th>
                     <th scope="col">Remarques</th>
-                    <th scope="col">CRUD</th>
+                    <th scope="col">Modifier</th>
+                    <th scope="col">Supprimer</th>
                 </tr>
             </thead>
             <tbody id="studentsTableBody">
@@ -66,6 +67,9 @@
 
         </form>
         <script>
+            
+            let studentId = 0;
+
             function onFormSubmit() {
                 // prevent the form to be sent to the server
                 event.preventDefault();
@@ -75,7 +79,18 @@
                 let adore = $("#inputAdore").prop("checked") ? "Oui" : "Non";
                 let remarques = $("#inputRemarques").val();
                 
-                $("#studentsTableBody").append(`<tr><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${adore}</td><td>${remarques}</td><td></td><td></td></tr>`);
+                $("#studentsTableBody").append(`<tr id="${studentId}"><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${adore}</td><td>${remarques}</td><td><button onclick="onModifierClick(${studentId}); return false;">Modifier</button></td><td><button onclick="onSupprimerClick(${studentId}); return false;">Supprimer</button></td></tr>`);
+
+                studentId = studentId+1;
+            }
+
+            function onSupprimerClick(id) {
+                $("#" + id).remove();
+            }
+            
+            function onModifierClick(id) {
+                var node = document.querySelector("#" + id);
+                node = document.querySelector("#" + 0);
             }
         </script>
     </body>

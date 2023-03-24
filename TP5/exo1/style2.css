@@ -1,0 +1,54 @@
+body {
+    background-color: #212121;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 50px auto;
+    width: 90%;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #00ffff;
+    color: #212121;
+    text-transform: uppercase;
+  }
+  
+  .form-group label {
+    color: #00ffff;
+    font-size: 1.2rem;
+  }
+  
+  .form-control {
+    background-color: #212121;
+    border: none;
+    border-bottom: 2px solid #00ffff;
+    color: #fff;
+    font-size: 1.2rem;
+  }
+  
+  .btn-primary {
+    background-color: #00ffff;
+    border: none;
+    border-radius: 20px;
+    color: #212121;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-primary:hover {
+    background-color: #212121;
+    color: #00ffff;
+  }
+  
