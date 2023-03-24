@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="res"></div>
+    </body>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url:'http://localhost/IDAW/TP4/exo5/api.php/users/', //config.php url api  SPA (single page application)
+                    method: 'GET',
+                    dataType: 'json',
+                })
+                .done(function(response){
+                    let data = JSON.stringify(response);
+                    $("div#res").append(data);
+                    alert("Requête effectuée avec succés");
+                })
+                .fail(function(error){
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
+            });
+        </script>
+    </body>
+    
+</html>

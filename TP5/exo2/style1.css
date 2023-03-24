@@ -1,0 +1,72 @@
+/* Ajout de Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Stylisation du body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Stylisation de la table */
+.table {
+  margin: 50px auto;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylisation des cellules de la table */
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Stylisation de l'en-tête de la table */
+th {
+  background-color: #4CAF50;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Stylisation des inputs */
+.form-control {
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+  border-radius: 0;
+}
+
+/* Stylisation du bouton */
+.btn-primary {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #3e8e41;
+}
+
+/* Stylisation du formulaire */
+.form-group {
+  margin: 20px 0;
+}
+
+.col-form-label {
+  text-align: right;
+  padding-right: 20px;
+}
+
+/* Stylisation des messages d'erreur */
+.error-message {
+  color: red;
+  font-weight: bold;
+}
