@@ -78,7 +78,7 @@
                 let date = $("#inputDate").val();
                 let adore = $("#inputAdore").prop("checked") ? "Oui" : "Non";
                 let remarques = $("#inputRemarques").val();
-                
+
                 $("#studentsTableBody").append(`<tr id="${studentId}"><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${adore}</td><td>${remarques}</td><td><button onclick="onModifierClick(${studentId}); return false;">Modifier</button></td><td><button onclick="onSupprimerClick(${studentId}); return false;">Supprimer</button></td></tr>`);
 
                 studentId = studentId+1;
@@ -87,11 +87,17 @@
             function onSupprimerClick(id) {
                 $("#" + id).remove();
             }
-            
+
             function onModifierClick(id) {
-                var node = document.querySelector("#" + id);
-                node = document.querySelector("#" + 0);
-            }
+                // Update the row's values
+                let nom = $("#inputNom").val();
+                let prenom = $("#inputPrenom").val();
+                let date = $("#inputDate").val();
+                let adore = $("#inputAdore").prop("checked") ? "Oui" : "Non";
+                let remarques = $("#inputRemarques").val();
+
+                $("#" + id).html(`<td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${adore}</td><td>${remarques}</td><td><button onclick="onModifierClick(${id}); return false;">Modifier</button></td><td><button onclick="onSupprimerClick(${id}); return false;">Supprimer</button></td>`);
+                }
         </script>
     </body>
 </html>
