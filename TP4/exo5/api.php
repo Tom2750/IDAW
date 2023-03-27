@@ -17,7 +17,7 @@
             $resultat = $request->fetchAll(PDO::FETCH_OBJ);
             $status_code_header = 'HTTP/1.1 200 OK';
         } else {
-            $request = $pdo->prepare("SELECT * FROM Users");
+            $request = $pdo->prepare("SELECT * FROM Users ORDER BY id ASC");
             $request->execute();
             $resultat = $request->fetchAll(PDO::FETCH_OBJ);
             $status_code_header = 'HTTP/1.1 200 OK';
