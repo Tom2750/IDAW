@@ -2,16 +2,20 @@
     function api_aliments($request_method, $uri, $pdo){
         $resultat = 'method not allowed';
 
-        if($request_method=='GET'){
-            $resultat = get_aliments($uri, $pdo);
-        } elseif($request_method=='POST') {
-            $resultat = post_aliments($uri, $pdo);
-        } elseif($request_method=='PUT') {
-            $resultat = put_aliments($uri, $pdo);
-        } elseif($request_method=='DELETE') {
-            $resultat = delete_aliments($uri, $pdo);
+        switch($request_method){
+            case 'GET':
+                $resultat = get_aliments($uri, $pdo);
+                break;
+            case 'POST':
+                $resultat = post_aliments($uri, $pdo);
+                break;
+            case 'PUT';
+                $resultat = put_aliments($uri, $pdo);
+                break;
+            case 'DELETE':
+                $resultat = delete_aliments($uri, $pdo);
+                break;
         }
-
         return $resultat;
     }
 

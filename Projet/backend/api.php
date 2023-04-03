@@ -5,13 +5,16 @@
     $request_method = $_SERVER['REQUEST_METHOD'];
     $uri = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
     $uri = explode( '/', $uri );
-
-    if($uri[1] == 'aliment') {
-        require_once('aliment.php');
-        $resultat = api_aliments($request_method, $uri, $pdo);
-    } elseif($uri[1] == 'utilisateur') {
-        require_once('utilisateur.php');
-        $resultat = api_utilisateurs($request_method, $uri, $pdo);
+        
+    switch ($uri[1]) {
+        case 'aliments':
+            require_once('aliments.php');
+            $resultat = api_aliments($request_method, $uri, $pdo);
+            break;
+        case 'utilisateurs':
+            require_once('utilisateurs.php');
+            $resultat = api_utilisateurs($request_method, $uri, $pdo);
+            break;
     }
 
     header('Content-Type: application/json');

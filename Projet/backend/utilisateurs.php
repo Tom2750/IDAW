@@ -2,14 +2,19 @@
     function api_utilisateurs($request_method, $uri, $pdo){
         $resultat = 'method not allowed';
 
-        if($request_method=='GET'){
-            $resultat = get_utilisateurs($uri, $pdo);
-        } elseif($request_method=='POST') {
-            $resultat = post_utilisateurs($uri, $pdo);
-        } elseif($request_method=='PUT') {
-            $resultat = put_utilisateurs($uri, $pdo);
-        } elseif($request_method=='DELETE') {
-            $resultat = delete_utilisateurs($uri, $pdo);
+        switch($request_method){
+            case 'GET':
+                $resultat = get_utilisateurs($uri, $pdo);
+                break;
+            case 'POST':
+                $resultat = post_utilisateurs($uri, $pdo);
+                break;
+            case 'PUT';
+                $resultat = put_utilisateurs($uri, $pdo);
+                break;
+            case 'DELETE':
+                $resultat = delete_utilisateurs($uri, $pdo);
+                break;
         }
 
         return $resultat;
