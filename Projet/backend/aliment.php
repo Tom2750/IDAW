@@ -50,9 +50,7 @@
             $nom = $json['NOM_ALIMENT'];
             $id_type = $json['ID_TYPE'];
 
-            $request = $pdo->prepare("UPDATE aliment SET NOM_ALIMENT = '".$nom."' WHERE ID_ALIMENT = ".$uri[2]);
-            $request->execute();
-            $request = $pdo->prepare("UPDATE aliment SET ID_TYPE = '".$id_type."' WHERE ID_ALIMENT = ".$uri[2]);
+            $request = $pdo->prepare("UPDATE aliment SET NOM_ALIMENT = '".$nom."', ID_TYPE = '".$id_type."' WHERE ID_ALIMENT = ".$uri[2]);
             $request->execute();
         }
 
