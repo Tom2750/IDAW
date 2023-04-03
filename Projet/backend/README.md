@@ -17,3 +17,6 @@ Documentation de l'api :
     GET: renvoie l'utilisateur d'id {id}
     PUT: modifie l'utilisateur d'id {id} avec les valeurs fournies dans body
     DELETE: supprime l'utilisateur d'id {id}
+
+
+azer
