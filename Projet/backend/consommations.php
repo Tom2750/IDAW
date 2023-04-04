@@ -16,7 +16,7 @@
                 $resultat = delete_consommations($uri, $pdo);
                 break;
         }
-        
+
         return $resultat;
     }
 
