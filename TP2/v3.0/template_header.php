@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="fr">
- <head>
-    <title>Mon site web de pro</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
- </head>
- <body>
+   <head>
+      <title>Mon site web de pro</title>
+      <meta charset="utf-8">
+      

@@ -17,9 +17,9 @@
 
     function get_utilisateurs($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = $uri[2]");
+            $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = $uri[2]");
         } else {
-            $request = $pdo->prepare("SELECT * FROM utilisateur ORDER BY id_utilisateur ASC");
+            $request = $pdo->prepare("SELECT * FROM utilisateurs ORDER BY id_utilisateur ASC");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);

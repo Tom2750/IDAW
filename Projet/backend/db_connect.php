@@ -12,6 +12,6 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $erreur) {
-        myLog('Erreur : '.$erreur->getMessage());
+        error_log("Erreur : ".$erreur->getMessage(), 0);
     }
 ?>
