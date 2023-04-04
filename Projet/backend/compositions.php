@@ -55,6 +55,9 @@
             $id_nutriment = $json['ID_NUTRIMENT'];
             $ratio = $json['RATIO'];
 
+            $request = $pdo->prepare("UPDATE compositions SET RATIO = '".$ratio."' WHERE ID_NUTRIMENT = '".$id_nutriment."' AND ID_ALIMENT = ".$uri[2]);
+            $request->execute();
+
             $request = $pdo->prepare("SELECT * FROM compositions JOIN nutriments ON compositions.id_nutriment = nutriments.id_nutriment WHERE compositions.id_nutriment = '".$id_nutriment."' AND ID_ALIMENT = '".$uri[2]."'");
             $request->execute();
             $resultat = $request->fetchAll(PDO::FETCH_OBJ);

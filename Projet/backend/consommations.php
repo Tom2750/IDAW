@@ -30,7 +30,7 @@
             $date_debut = $json['DATE_DEBUT'];
             $date_fin = $json['DATE_FIN'];
             
-            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_UTILISATEUR = ".$id_utilisateur." 
+            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_CONSO = ".$id_utilisateur." 
             AND DATE_CONSO > '".$date_debut."' AND DATE_CONSO < '".$date_fin."' ORDER BY ID_UTILISATEUR ASC");
 
         }
@@ -67,19 +67,20 @@
             $quantite = $json['QUANTITE'];
             $date = $json['DATE_CONSO'];
 
-            $request = $pdo->prepare("UPDATE aliment SET NOM_ALIMENT = '".$nom."', ID_TYPE = '".$id_type."' WHERE ID_ALIMENT = ".$uri[2]);
+            $request = $pdo->prepare("UPDATE consommations SET ID_UTILISATEUR = '".$id_utilisateur."', ID_ALIMENT = '".$id_aliment."',
+            QUANTITE = '".$quantite."', DATE_CONSO = '".$date."' WHERE ID_CONSO = ".$uri[2]);
             $request->execute();
         }
 
-        return get_aliments($uri, $pdo);
+        return get_consommations($uri, $pdo);
     }
     
-    function delete_aliments($uri, $pdo){
+    function delete_consommations($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("DELETE FROM aliment WHERE ID_ALIMENT = $uri[2]");
+            $request = $pdo->prepare("DELETE FROM consommations WHERE ID_CONSO = $uri[2]");
             $request->execute();
         }
 
-        return NULL;
+        return [];
     }
 ?>
