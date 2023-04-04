@@ -16,6 +16,14 @@
             require_once('utilisateurs.php');
             $resultat = api_utilisateurs($request_method, $uri, $pdo);
             break;
+        case 'compositions':
+            require_once('compositions.php');
+            $resultat = api_compositions($request_method, $uri, $pdo);
+            break;
+        case 'consommations':
+            require_once('consommations.php');
+            $resultat = api_consommations($request_method, $uri, $pdo);
+            break;
     }
 
     header('Content-Type: application/json');
