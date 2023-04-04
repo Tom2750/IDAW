@@ -27,6 +27,12 @@ Documentation de l'api :
     PUT: modifie la composition pour l'aliment d'id {id} et le nutriment avec la valeur dans le corps de la requête
     DELETE: supprime la composition pour l'aliment d'id {id} et le nutriment d'id id
 
-id_micro_nutriment => id_nutriment x2
-doublons compositions
+- id_micro_nutriment => id_nutriment x2
+- doublons compositions
 clé primaire pour composition
+ajout d'un id pour la table composition ?
+- consommation avec un s
+
+TODO :
+faire put composition
+finir consommation

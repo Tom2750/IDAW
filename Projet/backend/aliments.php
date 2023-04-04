@@ -22,9 +22,9 @@
 
     function get_aliments($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("SELECT * FROM aliment WHERE id_aliment = $uri[2]");
+            $request = $pdo->prepare("SELECT * FROM aliments WHERE id_aliment = $uri[2]");
         } else {
-            $request = $pdo->prepare("SELECT * FROM aliment ORDER BY id_aliment ASC");
+            $request = $pdo->prepare("SELECT * FROM aliments ORDER BY id_aliment ASC");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
@@ -32,19 +32,17 @@
     }
 
     function post_aliments($uri, $pdo){
-        if(!empty($uri[2])) {
-            $json = json_decode(file_get_contents('php://input'), true);
+        $json = json_decode(file_get_contents('php://input'), true);
 
-            $nom = $json['NOM_ALIMENT'];
-            $id_type = $json['ID_TYPE'];
+        $nom = $json['NOM_ALIMENT'];
+        $id_type = $json['ID_TYPE'];
 
-            $request = $pdo->prepare("INSERT INTO aliment (NOM_ALIMENT, ID_TYPE) VALUES ('".$nom."', '".$id_type."')");
-            $request->execute();
+        $request = $pdo->prepare("INSERT INTO aliments (NOM_ALIMENT, ID_TYPE) VALUES ('".$nom."', '".$id_type."')");
+        $request->execute();
 
-            $request = $pdo->prepare("SELECT * FROM aliment WHERE NOM_ALIMENT = '".$nom."' AND ID_TYPE = '".$id_type."'");
-            $request->execute();
-            $resultat = $request->fetchAll(PDO::FETCH_OBJ);
-        }
+        $request = $pdo->prepare("SELECT * FROM aliments WHERE NOM_ALIMENT = '".$nom."' AND ID_TYPE = '".$id_type."'");
+        $request->execute();
+        $resultat = $request->fetchAll(PDO::FETCH_OBJ);
         return $resultat;
     }
 
@@ -55,7 +53,7 @@
             $nom = $json['NOM_ALIMENT'];
             $id_type = $json['ID_TYPE'];
 
-            $request = $pdo->prepare("UPDATE aliment SET NOM_ALIMENT = '".$nom."', ID_TYPE = '".$id_type."' WHERE ID_ALIMENT = ".$uri[2]);
+            $request = $pdo->prepare("UPDATE aliments SET NOM_ALIMENT = '".$nom."', ID_TYPE = '".$id_type."' WHERE ID_ALIMENT = ".$uri[2]);
             $request->execute();
         }
 
@@ -64,7 +62,7 @@
     
     function delete_aliments($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("DELETE FROM aliment WHERE ID_ALIMENT = $uri[2]");
+            $request = $pdo->prepare("DELETE FROM aliments WHERE ID_ALIMENT = $uri[2]");
             $request->execute();
         }
 
