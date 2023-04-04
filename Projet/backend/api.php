@@ -3,6 +3,7 @@
     require_once('db_connect.php');
 
     $request_method = $_SERVER['REQUEST_METHOD'];
+    $resultat = null;
     $uri = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
     $uri = explode( '/', $uri );
         
