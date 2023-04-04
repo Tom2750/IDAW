@@ -16,6 +16,7 @@
                 $resultat = delete_aliments($uri, $pdo);
                 break;
         }
+        
         return $resultat;
     }
 
