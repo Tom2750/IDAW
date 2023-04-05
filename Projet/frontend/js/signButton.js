@@ -1,4 +1,4 @@
-let path = "<?php echo(_PATH) ; ?>";
+console.log(path);
 
 $(document).ready(function(){
     const signUpButton = document.getElementById('signUp');
@@ -82,6 +82,7 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
         })
         .done(function(response){
+            //console.log(jsonData);
             jsonStringUtilisateurs = JSON.stringify(response);
         })
         .fail(function(error){

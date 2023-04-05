@@ -1,0 +1,1 @@
+let path = "http://localhost/IDAW-1/Projet/"

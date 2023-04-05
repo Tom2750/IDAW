@@ -4,6 +4,7 @@
 
         <link rel="stylesheet" href="css/loginForm_styles.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="config.js"></script>
         <script type="text/javascript" src="js/signButton.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
