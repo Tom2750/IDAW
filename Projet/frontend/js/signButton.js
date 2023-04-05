@@ -17,7 +17,7 @@ $(document).ready(function(){
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");
     });
-
+/*
     function onSignUpFormSubmit() { //pas finie
         event.preventDefault();
         const inputName = document.getElementById('nameSignUp').val();
@@ -43,7 +43,7 @@ $(document).ready(function(){
         .fail(function(error){
             alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         })
-    }
+    }*/
 
     function onSignInFormSubmit() { //pas finie
         event.preventDefault();
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
     function getUtilisateur(jsonData) {
         $.ajax({
-            url: path + "backend/api.php/utilisateur",
+            url: path + "backend/api.php/utilisateurs",
             method: 'GET',
             dataType: 'json',
             data: JSON.stringify(jsonData),
