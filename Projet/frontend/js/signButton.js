@@ -5,11 +5,6 @@ $(document).ready(function(){
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 
-    console.log(getUtilisateur({
-        "LOGIN": "william.nguyen@etu.imt-lille-douai.fr",
-        "H_MOT_DE_PASSE": "William",
-    }))
-
     signUpButton.addEventListener('click', () => {
         container.classList.add("right-panel-active");
     });
@@ -78,6 +73,7 @@ $(document).ready(function(){
     }
 
     function getUtilisateur(jsonData) {
+        jsonStringUtilisateurs = null;
         $.ajax({
             url: path + "backend/api.php/utilisateurs",
             method: 'GET',
@@ -93,4 +89,9 @@ $(document).ready(function(){
         })
         return jsonStringUtilisateurs;
     }
+
+    console.log(getUtilisateur({
+        "LOGIN": "william.nguyen@etu.imt-lille-douai.fr",
+        "H_MOT_DE_PASSE": "William"
+    }))
 });

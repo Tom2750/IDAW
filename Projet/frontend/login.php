@@ -50,7 +50,7 @@
     require_once('template_footer.php');
 ?>
 
-<script>
+<!--<script>
     function onSignInFormSubmit() {
         event.preventDefault();
         var jsonData = {
@@ -72,4 +72,4 @@
             alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         })
     }
-</script>
+</script>-->
