@@ -49,3 +49,27 @@
 <?php
     require_once('template_footer.php');
 ?>
+
+<script>
+    function onSignInFormSubmit() {
+        event.preventDefault();
+        var jsonData = {
+            "Mail": $("#emailSignIn").val(),
+            "Password": $("#pwSignIn").val(),
+        };
+
+        $.ajax({
+            url: path + "/users",
+            method: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            contentType: "application/json; charset=utf-8",
+        })
+        .done(function(response){
+            getAllUtilisateurs();
+        })
+        .fail(function(error){
+            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        })
+    }
+</script>
