@@ -59,8 +59,8 @@
         };
 
         $.ajax({
-            url: path + "/users",
-            method: 'POST',
+            url: _PATH_ + "api.php/utilisateurs",
+            method: 'GET',
             dataType: 'json',
             data: JSON.stringify(jsonData),
             contentType: "application/json; charset=utf-8",

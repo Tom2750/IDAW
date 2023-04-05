@@ -1,4 +1,4 @@
-let path = "<?php echo(_PATH) ; ?>";
+let path = "<?php echo(_PATH_) ; ?>";
 
 $(document).ready(function(){
     const signUpButton = document.getElementById('signUp');

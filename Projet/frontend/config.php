@@ -1,3 +1,3 @@
 <?php
-    define('_PATH',"http://localhost/IDAW-1/Projet/");
+    define('_PATH_','http://localhost/IDAW/Projet/');
 ?>

@@ -10,7 +10,7 @@ Documentation de l'api :
     DELETE: supprime l'aliment d'id {id}
 
 /utilisateurs
-    GET: renvoie l'utilisateur dont le login est dans le corps de la requête
+    GET: renvoie l'utilisateur dont le login et le mot de passe sont dans le corps de la requête
     POST: ajoute un utilisateur avec les valeurs fournies dans le corps de la requête
 
 /utilisateurs/{id}
