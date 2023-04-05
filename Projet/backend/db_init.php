@@ -172,7 +172,7 @@
         $request->bindParam(':ratio', $row[2]);
 
         $request->execute();
-    }   
+    }
 
     function deleteTable($tableName, $pdo){
         $pdo->exec("DROP TABLE $tableName");
