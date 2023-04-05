@@ -1,4 +1,6 @@
 <?php
+    ini_set('max_execution_time', 300);
+
     /* Connexion à la base de donnée */
     require_once('config.php');
     require_once('db_connect.php');

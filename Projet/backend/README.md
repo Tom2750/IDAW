@@ -25,13 +25,16 @@ Documentation de l'api :
     GET: renvoie toutes les compositions pour l'aliment d'id {id}
     POST: ajoute une composition pour l'aliment d'id {id} avec les valeurs fournies dans le corps de la requête
     PUT: modifie la composition pour l'aliment d'id {id} et le nutriment avec la valeur dans le corps de la requête
-    DELETE: supprime la composition pour l'aliment d'id {id} et le nutriment d'id id
+    DELETE: supprime la composition pour l'aliment d'id {id} et le nutriment d'id id (dans la requete)
 
 /consommation
     GET: renvoie toutes les consommations d'un utilisateur sur une période, valeur dans la requête
+    POST: ajoute une consommation avec les valeurs dans la requete
 
 /consommation/{id}
     GET: renvoie la consommation d'id {id}
+    PUT: modifie la consommation d'id {id} avec les valeurs dans la requete
+    DELETE: supprime la conso d'id {id}
 
 - id_micro_nutriment => id_nutriment x2
 - doublons compositions

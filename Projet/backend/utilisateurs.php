@@ -24,7 +24,11 @@
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = $uri[2]");
         } else {
-            $request = $pdo->prepare("SELECT * FROM utilisateurs ORDER BY id_utilisateur ASC");
+            $json = json_decode(file_get_contents('php://input'), true);
+
+            $login = $json['LOGIN'];
+
+            $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = '".$login."'");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
