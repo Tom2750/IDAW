@@ -5,6 +5,11 @@ $(document).ready(function(){
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 
+    console.log(getUtilisateur({
+        "LOGIN": "william.nguyen@etu.imt-lille-douai.fr",
+        "H_MOT_DE_PASSE": "William",
+    }))
+
     signUpButton.addEventListener('click', () => {
         container.classList.add("right-panel-active");
     });
@@ -46,13 +51,19 @@ $(document).ready(function(){
         const inputPw = document.getElementById('pwSignIn').val();
         var hashPw = CryptoJS.MD5(inputPw);
         var jsonData = {
-            "NOM": inputName,
             "LOGIN": inputLogin,
-            "H_MOT_DE_PASSE": hashPw,
+            "H_MOT_DE_PASSE": inputPw,  ////Mofifier avec le hash
         };
+        $returnedUtilisateur = getUtilisateur(jsonData);
+        if(!empty($returnedUtilisateur)) {
+            document.location.href(path + "frontend/index.php")
+        }
+        else {
+            alert("Mauvais couple login / mot de passe");
+        }
         /*
         $.ajax({
-            url: path + "/users",
+            url: path + "/utilisateur",
             method: 'POST',
             dataType: 'json',
             data: JSON.stringify(jsonData),
@@ -64,14 +75,15 @@ $(document).ready(function(){
         .fail(function(error){
             alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         })*/
-        console.log(jsonData);
     }
 
-    function getAllUtilisateurs() {
+    function getUtilisateur(jsonData) {
         $.ajax({
-            url: path + "/utilisateur",
+            url: path + "backend/api.php/utilisateur",
             method: 'GET',
             dataType: 'json',
+            data: JSON.stringify(jsonData),
+            contentType: "application/json; charset=utf-8",
         })
         .done(function(response){
             jsonStringUtilisateurs = JSON.stringify(response);
@@ -80,9 +92,5 @@ $(document).ready(function(){
             alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
         })
         return jsonStringUtilisateurs;
-    }
-
-    function utilisateursIsExist($userToVerify) {
-
     }
 });
