@@ -1,1 +1,1 @@
-let path = "http://localhost/IDAW-1/Projet/"
+let path = "http://localhost/IDAW/Projet/"

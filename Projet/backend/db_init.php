@@ -23,14 +23,14 @@
         `ID_NIVEAU_SPORTIF` int NOT NULL AUTO_INCREMENT,
         `NIVEAU` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_NIVEAU_SPORTIF`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `sexe` (
         `ID_SEXE` int NOT NULL AUTO_INCREMENT,
         `SEXE` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_SEXE`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `utilisateurs` (
@@ -47,23 +47,23 @@
         PRIMARY KEY (`ID_UTILISATEUR`),
         KEY `user_to_sex` (`SEXE`),
         KEY `user_to_sport` (`ID_NIVEAU_SPORTIF`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `type_aliment` (
         `ID_TYPE` int NOT NULL AUTO_INCREMENT,
         `NOM` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_TYPE`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `aliments` (
         `ID_ALIMENT` int NOT NULL AUTO_INCREMENT,
-        `NOM_ALIMENT` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+        `NOM_ALIMENT` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
         `ID_TYPE` int NOT NULL,
         PRIMARY KEY (`ID_ALIMENT`),
         KEY `aliment_to_type` (`ID_TYPE`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `consommation` (
@@ -75,14 +75,14 @@
         PRIMARY KEY (`ID_CONSO`),
         KEY `consomme_to_utilisateur` (`ID_UTILISATEUR`),
         KEY `consomme_to_aliment` (`ID_ALIMENT`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `nutriments` (
         `ID_MICRO_NUTRIMENT` int NOT NULL AUTO_INCREMENT,
         `NOM` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_MICRO_NUTRIMENT`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `est_compose_de` (
@@ -91,7 +91,7 @@
         `RATIO` float NOT NULL,
         KEY `compose_to_aliment_pere` (`ID_ALIMENT_PERE`),
         KEY `compose_to_aliment_fils` (`ID_ALIMENT_FILS`)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
       $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `compositions` (
@@ -100,7 +100,7 @@
         `RATIO` float DEFAULT NULL,
         KEY `comporte_to_micro` (`ID_MICRO_NUTRIMENT`),
         KEY `comporte_to_aliment` (`ID_ALIMENT`)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     //Insérer des données
@@ -177,7 +177,12 @@
     }
 
     function deleteTable($tableName, $pdo){
-        $pdo->exec("DROP TABLE $tableName");
+        $sql = "SHOW TABLES FROM "._MYSQL_DBNAME." LIKE '$tableName'";
+        $request = $pdo->query($sql);
+        if($request->rowCount() > 0) {
+          $pdo->exec("DROP TABLE $tableName");
+        }
+        $request->closeCursor();
     }
 ?>
 
