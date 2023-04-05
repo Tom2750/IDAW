@@ -26,8 +26,8 @@
         } else {
             $json = json_decode(file_get_contents('php://input'), true);
 
-            $login = $json['LOGIN'];
-            $h_mot_de_passe = $json['H_MOT_DE_PASSE'];
+            $login = $_GET['LOGIN'];
+            $h_mot_de_passe = $_GET['H_MOT_DE_PASSE'];
 
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = '".$login."' AND H_MOT_DE_PASSE = '".$h_mot_de_passe."'");
         }
