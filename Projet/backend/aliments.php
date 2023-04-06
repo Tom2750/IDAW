@@ -1,7 +1,5 @@
 <?php
     function api_aliments($request_method, $uri, $pdo){
-        $resultat = 'method not allowed';
-
         switch($request_method){
             case 'GET':
                 $resultat = get_aliments($uri, $pdo);
@@ -15,6 +13,8 @@
             case 'DELETE':
                 $resultat = delete_aliments($uri, $pdo);
                 break;
+            default:
+                $resultat = 1;
         }
         
         return $resultat;
