@@ -2,7 +2,7 @@
     ini_set('max_execution_time', 300);
 
     /* Connexion à la base de donnée */
-    require_once('config.php');
+    require_once('db_config.php');
     require_once('db_connect.php');
 
     // Suppression des foreign key
@@ -42,7 +42,7 @@
     $request = "CREATE TABLE IF NOT EXISTS `utilisateurs` (
         `ID_UTILISATEUR` int NOT NULL AUTO_INCREMENT,
         `LOGIN` varchar(100) NOT NULL,
-        `H_MOT_DE_PASSE` varchar(100) NOT NULL,
+        `HASH_MDP` varchar(100) NOT NULL,
         `NOM` varchar(100) NOT NULL,
         `PRENOM` varchar(100) NOT NULL,
         `TAILLE` int NOT NULL,
@@ -118,10 +118,10 @@
     $file = fopen('sql\utilisateurs.csv', "r");
     while (($row = fgetcsv($file)) !== FALSE) {
         $request = $pdo->prepare("
-                                INSERT INTO utilisateurs (LOGIN, H_MOT_DE_PASSE, NOM, PRENOM, TAILLE, POIDS, AGE, SEXE, ID_NIVEAU_SPORTIF) 
-                                VALUES (:login, :h_mot_de_passe, :nom, :prenom, :taille, :poids, :age, :sexe, :id_niveau_sportif)");
+                                INSERT INTO utilisateurs (LOGIN, HASH_MDP, NOM, PRENOM, TAILLE, POIDS, AGE, SEXE, ID_NIVEAU_SPORTIF) 
+                                VALUES (:login, :hash_mdp, :nom, :prenom, :taille, :poids, :age, :sexe, :id_niveau_sportif)");
         $request->bindParam(':login', $row[1]);
-        $request->bindParam(':h_mot_de_passe', $row[2]);
+        $request->bindParam(':hash_mdp', $row[2]);
         $request->bindParam(':nom', $row[3]);
         $request->bindParam(':prenom', $row[4]);
         $request->bindParam(':taille', $row[5]);

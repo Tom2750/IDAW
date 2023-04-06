@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="css/loginForm_styles.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="config.js"></script>
-        <script type="text/javascript" src="js/signButton.js"></script>
+        <script src="js/loginPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
    </head>
@@ -22,7 +22,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="#" onsubmit="onSignInFormSubmit()">
+                <form action="#">
                     <h1>Se connecter</h1>
                     <input type="email" id="emailSignIn" placeholder="Email" />
                     <input type="password" id="pwSignIn" placeholder="Mot de passe" />
@@ -50,27 +50,3 @@
 <?php
     require_once('template_footer.php');
 ?>
-
-<!--<script>
-    function onSignInFormSubmit() {
-        event.preventDefault();
-        var jsonData = {
-            "Mail": $("#emailSignIn").val(),
-            "Password": $("#pwSignIn").val(),
-        };
-
-        $.ajax({
-            url: _PATH_ + "api.php/utilisateurs",
-            method: 'GET',
-            dataType: 'json',
-            data: JSON.stringify(jsonData),
-            contentType: "application/json; charset=utf-8",
-        })
-        .done(function(response){
-            getAllUtilisateurs();
-        })
-        .fail(function(error){
-            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-        })
-    }
-</script>-->
