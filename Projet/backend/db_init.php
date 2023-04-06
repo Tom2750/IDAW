@@ -4,29 +4,35 @@
     /* Connexion à la base de donnée */
     require_once('config.php');
     require_once('db_connect.php');
-        
+
+    // Suppression des foreign key
+    
+    deleteFK("aliments", $pdo);
+    deleteFK("compositions", $pdo);
+    deleteFK("consommations", $pdo);
+    deleteFK("utilisateurs", $pdo);
+
 
     // Suppression des tables
     deleteTable("compositions", $pdo);
-    deleteTable("est_compose_de", $pdo);
     deleteTable("nutriments", $pdo);
-    deleteTable("consommation", $pdo);
+    deleteTable("consommations", $pdo);
     deleteTable("aliments", $pdo);
-    deleteTable("type_aliment", $pdo);
+    deleteTable("types_aliments", $pdo);
     deleteTable("utilisateurs", $pdo);
-    deleteTable("niveau_sportif", $pdo);
-    deleteTable("sexe", $pdo);
+    deleteTable("niveaux_sportifs", $pdo);
+    deleteTable("sexes", $pdo);
 
 
     // Créations des tables
-    $request = "CREATE TABLE IF NOT EXISTS `niveau_sportif` (
+    $request = "CREATE TABLE IF NOT EXISTS `niveaux_sportifs` (
         `ID_NIVEAU_SPORTIF` int NOT NULL AUTO_INCREMENT,
         `NIVEAU` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_NIVEAU_SPORTIF`)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
-    $request = "CREATE TABLE IF NOT EXISTS `sexe` (
+    $request = "CREATE TABLE IF NOT EXISTS `sexes` (
         `ID_SEXE` int NOT NULL AUTO_INCREMENT,
         `SEXE` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_SEXE`)
@@ -44,13 +50,11 @@
         `AGE` int NOT NULL,
         `SEXE` int NOT NULL,
         `ID_NIVEAU_SPORTIF` int NOT NULL,
-        PRIMARY KEY (`ID_UTILISATEUR`),
-        KEY `user_to_sex` (`SEXE`),
-        KEY `user_to_sport` (`ID_NIVEAU_SPORTIF`)
+        PRIMARY KEY (`ID_UTILISATEUR`)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
-    $request = "CREATE TABLE IF NOT EXISTS `type_aliment` (
+    $request = "CREATE TABLE IF NOT EXISTS `types_aliments` (
         `ID_TYPE` int NOT NULL AUTO_INCREMENT,
         `NOM` varchar(100) NOT NULL,
         PRIMARY KEY (`ID_TYPE`)
@@ -61,56 +65,52 @@
         `ID_ALIMENT` int NOT NULL AUTO_INCREMENT,
         `NOM_ALIMENT` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
         `ID_TYPE` int NOT NULL,
-        PRIMARY KEY (`ID_ALIMENT`),
-        KEY `aliment_to_type` (`ID_TYPE`)
+        PRIMARY KEY (`ID_ALIMENT`)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
-    $request = "CREATE TABLE IF NOT EXISTS `consommation` (
+    $request = "CREATE TABLE IF NOT EXISTS `consommations` (
         `ID_CONSO` int NOT NULL AUTO_INCREMENT,
         `ID_UTILISATEUR` int NOT NULL,
         `ID_ALIMENT` int NOT NULL,
         `QUANTITE` int NOT NULL,
         `DATE_CONSO` date NOT NULL,
-        PRIMARY KEY (`ID_CONSO`),
-        KEY `consomme_to_utilisateur` (`ID_UTILISATEUR`),
-        KEY `consomme_to_aliment` (`ID_ALIMENT`)
+        PRIMARY KEY (`ID_CONSO`)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
     $request = "CREATE TABLE IF NOT EXISTS `nutriments` (
-        `ID_MICRO_NUTRIMENT` int NOT NULL AUTO_INCREMENT,
+        `ID_NUTRIMENT` int NOT NULL AUTO_INCREMENT,
         `NOM` varchar(100) NOT NULL,
-        PRIMARY KEY (`ID_MICRO_NUTRIMENT`)
+        PRIMARY KEY (`ID_NUTRIMENT`)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
-    $request = "CREATE TABLE IF NOT EXISTS `est_compose_de` (
-        `ID_ALIMENT_PERE` int NOT NULL,
-        `ID_ALIMENT_FILS` int NOT NULL,
-        `RATIO` float NOT NULL,
-        KEY `compose_to_aliment_pere` (`ID_ALIMENT_PERE`),
-        KEY `compose_to_aliment_fils` (`ID_ALIMENT_FILS`)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
-      $pdo->exec($request);
-
     $request = "CREATE TABLE IF NOT EXISTS `compositions` (
-        `ID_MICRO_NUTRIMENT` int NOT NULL,
+        `ID_NUTRIMENT` int NOT NULL,
         `ID_ALIMENT` int NOT NULL,
-        `RATIO` float DEFAULT NULL,
-        KEY `comporte_to_micro` (`ID_MICRO_NUTRIMENT`),
-        KEY `comporte_to_aliment` (`ID_ALIMENT`)
+        `RATIO` float DEFAULT NULL
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
+
+    //Ajout des contraintes de clés étrangères
+    $pdo->exec("ALTER TABLE `aliments` ADD CONSTRAINT `aliment_to_type` FOREIGN KEY (`ID_TYPE`) REFERENCES `types_aliments`(`ID_TYPE`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `compositions` ADD CONSTRAINT `comporte_to_aliment` FOREIGN KEY (`ID_ALIMENT`) REFERENCES `aliments`(`ID_ALIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `compositions` ADD CONSTRAINT `comporte_to_micro` FOREIGN KEY (`ID_NUTRIMENT`) REFERENCES `nutriments`(`ID_NUTRIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `consommations` ADD CONSTRAINT `consomme_to_aliment` FOREIGN KEY (`ID_ALIMENT`) REFERENCES `aliments`(`ID_ALIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `consommations` ADD CONSTRAINT `consomme_to_utilisateur` FOREIGN KEY (`ID_UTILISATEUR`) REFERENCES `utilisateurs`(`ID_UTILISATEUR`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `utilisateurs` ADD CONSTRAINT `user_to_sex` FOREIGN KEY (`SEXE`) REFERENCES `sexes`(`ID_SEXE`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $pdo->exec("ALTER TABLE `utilisateurs` ADD CONSTRAINT `user_to_sport` FOREIGN KEY (`ID_NIVEAU_SPORTIF`) REFERENCES `niveaux_sportifs`(`ID_NIVEAU_SPORTIF`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+
     //Insérer des données
-    $request = "INSERT INTO `niveau_sportif` (`ID_NIVEAU_SPORTIF`, `NIVEAU`) VALUES
+    $request = "INSERT INTO `niveaux_sportifs` (`ID_NIVEAU_SPORTIF`, `NIVEAU`) VALUES
         (1, 'bas'),
         (2, 'moyen'),
         (3, 'élevé');";
     $pdo->exec($request);
 
-    $request = "INSERT INTO `sexe` (`ID_SEXE`, `SEXE`) VALUES
+    $request = "INSERT INTO `sexes` (`ID_SEXE`, `SEXE`) VALUES
         (1, 'Homme'),
         (2, 'Femme');";
     $pdo->exec($request);
@@ -136,7 +136,7 @@
     $file = fopen('sql\type_aliment.csv', "r");
     while (($row = fgetcsv($file)) !== FALSE) {
         $request = $pdo->prepare("
-                                INSERT INTO type_aliment (NOM) 
+                                INSERT INTO types_aliments (NOM) 
                                 VALUES (:nom)");
         $request->bindParam(':nom', $row[1]);
 
@@ -167,9 +167,9 @@
     $file = fopen('sql\compositions.csv', "r");
     while (($row = fgetcsv($file)) !== FALSE) {
         $request = $pdo->prepare("
-                                INSERT INTO compositions (ID_MICRO_NUTRIMENT, ID_ALIMENT, RATIO) 
-                                VALUES (:id_micro_nutriment, :id_aliment, :ratio)");
-        $request->bindParam(':id_micro_nutriment', $row[0]);
+                                INSERT INTO compositions (ID_NUTRIMENT, ID_ALIMENT, RATIO) 
+                                VALUES (:id_nutriment, :id_aliment, :ratio)");
+        $request->bindParam(':id_nutriment', $row[0]);
         $request->bindParam(':id_aliment', $row[1]);
         $request->bindParam(':ratio', $row[2]);
 
@@ -184,5 +184,31 @@
         }
         $request->closeCursor();
     }
-?>
 
+    function deleteFK($tableName, $pdo){
+      $sql = "SHOW TABLES FROM "._MYSQL_DBNAME." LIKE '$tableName'";
+      $request = $pdo->query($sql);
+      if($request->rowCount() > 0) {
+        switch($tableName) {
+          case `compositions`:
+            $pdo->exec("ALTER TABLE `compositions` DROP CONSTRAINT `comporte_to_aliment`");
+            $pdo->exec("ALTER TABLE `compositions` DROP CONSTRAINT `comporte_to_micro`");
+            break;
+          case `aliments`:
+            $pdo->exec("ALTER TABLE `aliments` DROP CONSTRAINT `aliment_to_type`");
+            break;
+          case `consommations`:
+            $pdo->exec("ALTER TABLE `consommations` DROP CONSTRAINT `consomme_to_aliment`");
+            $pdo->exes("ALTER TABLE `consommations` DROP CONSTRAINT `consomme_to_utilisateur`");
+            break;
+          case `utilisateurs`:
+            $pdo->exec("ALTER TABLE `utilisateurs` DROP CONSTRAINT `user_to_sex`");
+            $pdo->exec("ALTER TABLE `utilisateurs` DROP CONSTRAINT `user_to_sport`");
+            break;
+          default:
+            break;
+        }
+      }
+      $request->closeCursor();
+    }
+?>

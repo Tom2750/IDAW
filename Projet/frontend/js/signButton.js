@@ -1,5 +1,3 @@
-console.log(path);
-
 $(document).ready(function(){
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
@@ -83,7 +81,6 @@ function getUtilisateur(jsonData) {
         contentType: "application/json; charset=utf-8",
     })
     .done(function(response){
-        //console.log(jsonData);
         jsonStringUtilisateurs = JSON.stringify(response);
     })
     .fail(function(error){
