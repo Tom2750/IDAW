@@ -1,7 +1,5 @@
 <?php
     function api_consommations($request_method, $uri, $pdo){
-        $resultat = 'method not allowed';
-
         switch($request_method){
             case 'GET':
                 $resultat = get_consommations($uri, $pdo);
@@ -15,6 +13,8 @@
             case 'DELETE':
                 $resultat = delete_consommations($uri, $pdo);
                 break;
+            default:
+                $resultat = 1;
         }
 
         return $resultat;

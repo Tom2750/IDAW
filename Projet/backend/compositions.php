@@ -15,6 +15,8 @@
             case 'DELETE':
                 $resultat = delete_compositions($uri, $pdo);
                 break;
+            default:
+                $resultat = 1;
         }
 
         return $resultat;
