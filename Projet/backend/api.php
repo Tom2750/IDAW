@@ -39,7 +39,7 @@
             break;
     }
 
-    switch ($resultat):
+    switch ($resultat) {
         case 0:
             header('HTTP/1.1 404 Not Found');
             break;
@@ -50,4 +50,5 @@
             header('HTTP/1.1 200 OK');
             header('Content-Type: application/json');
             echo json_encode($resultat, JSON_PRETTY_PRINT);
+        }
 ?>
