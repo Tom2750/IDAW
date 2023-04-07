@@ -31,11 +31,11 @@ Documentation de l'api :
 
 
 /consommations
-    GET: renvoie toutes les consommations d'un utilisateur sur une période, valeur dans la requête
+    GET: renvoie toutes les consommations d'un utilisateur sur une période, valeur dans la requête     // a modifier
     POST: ajoute une consommation avec les valeurs dans la requete
 
 /consommations/{id}
-    GET: renvoie la consommation d'id {id}
+    GET: renvoie la consommation d'id {id}                                                              // a modifier
     PUT: modifie la consommation d'id {id} avec les valeurs dans la requete
     DELETE: supprime la conso d'id {id}
 

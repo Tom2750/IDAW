@@ -3,7 +3,7 @@
 ?>
 
         <link rel="stylesheet" href="css/styles_loginForm.css">
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        
         <script src="config.js"></script>
         <script src="js/loginPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
