@@ -23,13 +23,19 @@
     function get_utilisateurs($uri, $pdo){
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = $uri[2]");
-        } else {
+        } else if(isset($_GET['LOGIN']) AND isset($_GET['HASH_MDP'])){
             $json = json_decode(file_get_contents('php://input'), true);
 
             $login = $_GET['LOGIN'];
             $h_mot_de_passe = $_GET['HASH_MDP'];
 
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = '".$login."' AND HASH_MDP = '".$h_mot_de_passe."'");
+        } else if(isset($_GET['LOGIN'])){
+            $json = json_decode(file_get_contents('php://input'), true);
+
+            $login = $_GET['LOGIN'];
+
+            $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = '".$login."'");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
@@ -41,7 +47,7 @@
             
         $login = $json['LOGIN'];
         $mot_de_passe = $json['HASH_MDP'];
-        $nom = $json['NOM'];
+        //$nom = $json['NOM'];
         //$prenom = $json['PRENOM'];
         //$taille = (int)$json['TAILLE'];
         //$poids = (float)$json['POIDS'];
@@ -54,15 +60,25 @@
                                 VALUES ('".$login."', '".$mot_de_passe."', '".$nom."', '".$prenom."', 
                                 '".$taille."', '".$poids."', '".$age."', '".$sexe."', '".$id_niveau."')");*/
 
-        $request = $pdo->prepare("INSERT INTO utilisateurs (LOGIN, HASH_MDP, NOM, SEXE, ID_NIVEAU_SPORTIF) 
-                                VALUES ('".$login."', '".$mot_de_passe."', '".$nom."', '".$sexe."', '".$id_niveau."')");
-        $request->execute();
+        /*$request = $pdo->prepare("INSERT INTO utilisateurs (LOGIN, HASH_MDP, NOM, SEXE, ID_NIVEAU_SPORTIF) 
+                                VALUES ('".$login."', '".$mot_de_passe."', '".$nom."', '".$sexe."', '".$id_niveau."')");*/
 
-        /*$request = $pdo->prepare("SELECT * FROM utilisateurs WHERE NOM = '".$nom."' AND PRENOM = '".$prenom."'");
-        $request->execute();
-        $resultat = $request->fetchAll(PDO::FETCH_OBJ);
+        $request = $pdo->prepare("INSERT INTO utilisateurs (LOGIN, HASH_MDP, SEXE, ID_NIVEAU_SPORTIF) 
+        VALUES (:login,:mdp,:sexe,:niveau)");
+        $request->execute([
+            ':login' => $login,
+            ':mdp' => $mot_de_passe,
+            ':sexe' => $sexe,
+            ':niveau' => $id_niveau
+        ]);
 
-        return $resultat;*/
+        $request2 = $pdo->prepare("SELECT * FROM utilisateurs WHERE LOGIN = :login");
+        $request2->execute([
+            ':login' => $login
+        ]);
+        $resultat = $request2->fetchAll(PDO::FETCH_OBJ);
+
+        return $resultat;
     }
 
     function put_utilisateurs($uri, $pdo){

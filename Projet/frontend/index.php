@@ -24,7 +24,6 @@
             <div class="form-container sign-up-container">
                 <form action="#">
                     <h1>Créer un compte</h1>
-                    <input type="text" id="nameSignUp" placeholder="Nom" />
                     <input type="email" id="emailSignUp" placeholder="Email" />
                     <input type="password" id="pwSignUp" placeholder="Mot de passe" />
                     <select class="box" id="sexeSignUp">

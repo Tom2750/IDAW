@@ -11,6 +11,7 @@ $(document).ready(function(){
         container.classList.remove("right-panel-active");
     });
 
+
     $("#connexion").click(function() {
         event.preventDefault();
         const inputLogin = $("#emailSignIn").val();
@@ -24,10 +25,10 @@ $(document).ready(function(){
         const inputNom = $("#nameSignUp").val();
         const inputLogin = $("#emailSignUp").val();
         const inputPw = $("#pwSignUp").val();
-        const inputSexe = $("#sexeSignUp").value;
-        const inputSport = $("#sportSignUp").value;
+        const inputSexe = $("#sexeSignUp").val();
+        const inputSport = $("#sportSignUp").val();
         var hashPw = CryptoJS.MD5(inputPw);
-        creerCompte(inputNom, inputLogin, inputPw, inputSexe, inputSport); //modifier avec hashPw
+        creerCompte(inputLogin, inputPw, inputSexe, inputSport); //modifier avec hashPw
     });
 
     function connexion(login, pwd) {
@@ -55,23 +56,50 @@ $(document).ready(function(){
           });
     }
 
-    function creerCompte(nom, login, pwd, sexe, niveauSport) {
-        jsonData = {
-            "NOM": nom,
+    function creerCompte(login, pwd, sexe, niveauSport) {
+        var jsonData = {
             "LOGIN": login,
             "HASH_MDP": pwd,
             "SEXE": sexe,
             "ID_NIVEAU_SPORTIF": niveauSport
-          };
-        $.ajax({
+          }
+        compteExiste(login, function(result) {
+          if (result) {
+              alert("Cet email est déjà utilisé !");
+          } else {
+              $.ajax({
+                url: path + "backend/api.php/utilisateurs",
+                method: "POST",
+                dataType: "json",
+                data: JSON.stringify(jsonData),
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                  // Traitement de la réponse de l'API
+                  if (!(response.length==0)) {
+                    // Enregistrement réussi
+                    alert("Compte créé avec succès !");
+                  } else {
+                    // Enregistrement échoué
+                    alert("Erreur : " + response.message);
+                  }
+                },
+                error: function(error) {
+                  // Traitement de l'erreur
+                  alert("Une erreur s'est produite : " + JSON.stringify(error));
+                } 
+              });
+          }
+      });
+      /*if(compteExiste(login) == false){
+          $.ajax({
             url: path + "backend/api.php/utilisateurs",
-            type: "POST",
+            method: "POST",
             dataType: "json",
             data: JSON.stringify(jsonData),
             contentType: "application/json; charset=utf-8",
             success: function(response) {
               // Traitement de la réponse de l'API
-              if (response.success) {
+              if (!(response.length==0)) {
                 // Enregistrement réussi
                 alert("Compte créé avec succès !");
               } else {
@@ -79,15 +107,39 @@ $(document).ready(function(){
                 alert("Erreur : " + response.message);
               }
             },
+            error: function(error) {
+              // Traitement de l'erreur
+              alert("Une erreur s'est produite : " + JSON.stringify(error));
+            } 
+          });
+        } else {
+          alert("Cet email est déjà utilisé !");
+        }*/
+  }
+
+
+    function compteExiste(login, callback) {
+        params = `LOGIN=${login}`; 
+        $.ajax({
+            url: path + `backend/api.php/utilisateurs?` + params,
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+              // Traitement de la réponse de l'API
+              if (!(response.length==0)) {
+                console.log(response);
+                callback(true);
+              } else {
+                console.log(response);
+                callback(false);
+              }
+            },
             error: function(jqXHR, textStatus, errorThrown) {
               // Traitement de l'erreur
               alert("Une erreur s'est produite : " + textStatus + ", " + errorThrown);
             }
-          });
+        });
     }
-
-
-
 
 
 });
