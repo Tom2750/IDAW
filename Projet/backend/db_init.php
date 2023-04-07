@@ -6,7 +6,6 @@
     require_once('db_connect.php');
 
     // Suppression des foreign key
-    
     deleteFK("aliments", $pdo);
     deleteFK("compositions", $pdo);
     deleteFK("consommations", $pdo);
@@ -43,11 +42,11 @@
         `ID_UTILISATEUR` int NOT NULL AUTO_INCREMENT,
         `LOGIN` varchar(100) NOT NULL,
         `HASH_MDP` varchar(100) NOT NULL,
-        `NOM` varchar(100) NOT NULL,
-        `PRENOM` varchar(100) NOT NULL,
-        `TAILLE` int NOT NULL,
-        `POIDS` float NOT NULL,
-        `AGE` int NOT NULL,
+        `NOM` varchar(100) NULL,
+        `PRENOM` varchar(100) NULL,
+        `TAILLE` int NULL,
+        `POIDS` float NULL,
+        `AGE` int NULL,
         `SEXE` int NOT NULL,
         `ID_NIVEAU_SPORTIF` int NOT NULL,
         PRIMARY KEY (`ID_UTILISATEUR`)

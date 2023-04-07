@@ -22,7 +22,7 @@
    <body>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form action="#" id="signUpForm">
                     <h1>Créer un compte</h1>
                     <input type="email" id="emailSignUp" placeholder="Email" />
                     <input type="password" id="pwSignUp" placeholder="Mot de passe" />
@@ -41,7 +41,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="dashboard.php">
+                <form action="dashboard.php" id="signInForm">
                     <h1>Se connecter</h1>
                     <input type="email" id="emailSignIn" placeholder="Email" />
                     <input type="password" id="pwSignIn" placeholder="Mot de passe" />

@@ -44,9 +44,11 @@ $(document).ready(function(){
                 alert("Connexion réussie !");
                 window.location.href = "dashboard.php";
                 document.cookie = 'login='+response[0]['ID_UTILISATEUR'];
+                document.getElementById("signInForm").reset();
               } else {
                 // Connexion échouée
                 alert("Login ou mot de passe incorrect !");
+                document.getElementById("signInForm").reset();
               }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -78,9 +80,11 @@ $(document).ready(function(){
                   if (!(response.length==0)) {
                     // Enregistrement réussi
                     alert("Compte créé avec succès !");
+                    document.getElementById("signUpForm").reset();
                   } else {
                     // Enregistrement échoué
                     alert("Erreur : " + response.message);
+                    document.getElementById("signUpForm").reset();
                   }
                 },
                 error: function(error) {
@@ -89,32 +93,8 @@ $(document).ready(function(){
                 } 
               });
           }
+          container.classList.remove("right-panel-active");
       });
-      /*if(compteExiste(login) == false){
-          $.ajax({
-            url: path + "backend/api.php/utilisateurs",
-            method: "POST",
-            dataType: "json",
-            data: JSON.stringify(jsonData),
-            contentType: "application/json; charset=utf-8",
-            success: function(response) {
-              // Traitement de la réponse de l'API
-              if (!(response.length==0)) {
-                // Enregistrement réussi
-                alert("Compte créé avec succès !");
-              } else {
-                // Enregistrement échoué
-                alert("Erreur : " + response.message);
-              }
-            },
-            error: function(error) {
-              // Traitement de l'erreur
-              alert("Une erreur s'est produite : " + JSON.stringify(error));
-            } 
-          });
-        } else {
-          alert("Cet email est déjà utilisé !");
-        }*/
   }
 
 
@@ -143,32 +123,4 @@ $(document).ready(function(){
 
 
 });
-
-/*
-function onSignUpFormSubmit() { //pas finie
-    event.preventDefault();
-    const inputName = document.getElementById('nameSignUp').val();
-    const inputLogin = document.getElementById('emailSignUp').val();
-    const inputPw = document.getElementById('pwSignUp').val();
-    var hashPw = CryptoJS.MD5(inputPw);
-    var jsonData = {
-        "NOM": inputName,
-        "LOGIN": inputLogin,
-        "H_MOT_DE_PASSE": hashPw,
-    };
-
-    $.ajax({
-        url: path + "/users",
-        method: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        contentType: "application/json; charset=utf-8",
-    })
-    .done(function(response){
-        alert("OK");
-    })
-    .fail(function(error){
-        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-    })
-}*/
 
