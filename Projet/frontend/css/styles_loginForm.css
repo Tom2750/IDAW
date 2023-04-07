@@ -210,6 +210,17 @@ input {
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
+
+.box{
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+
+
 /*
 .social-container {
 	margin: 20px 0;

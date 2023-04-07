@@ -42,23 +42,27 @@
         $login = $json['LOGIN'];
         $mot_de_passe = $json['HASH_MDP'];
         $nom = $json['NOM'];
-        $prenom = $json['PRENOM'];
-        $taille = $json['TAILLE'];
-        $poids = $json['POIDS'];
-        $age = $json['AGE'];
-        $sexe = $json['SEXE'];
-        $id_niveau = $json['ID_NIVEAU_SPORTIF'];
+        //$prenom = $json['PRENOM'];
+        //$taille = (int)$json['TAILLE'];
+        //$poids = (float)$json['POIDS'];
+        //$age = (int)$json['AGE'];
+        $sexe = (int)$json['SEXE'];
+        $id_niveau = (int)$json['ID_NIVEAU_SPORTIF'];
 
-        $request = $pdo->prepare("INSERT INTO utilisateur (LOGIN, HASH_MDP, NOM, PRENOM, TAILLE, POIDS, AGE, SEXE, ID_NIVEAU_SPORTIF) 
+        
+        /*$request = $pdo->prepare("INSERT INTO utilisateurs (LOGIN, HASH_MDP, NOM, PRENOM, TAILLE, POIDS, AGE, SEXE, ID_NIVEAU_SPORTIF) 
                                 VALUES ('".$login."', '".$mot_de_passe."', '".$nom."', '".$prenom."', 
-                                '".$taille."', '".$poids."', '".$age."', '".$sexe."', '".$id_niveau."')");
+                                '".$taille."', '".$poids."', '".$age."', '".$sexe."', '".$id_niveau."')");*/
+
+        $request = $pdo->prepare("INSERT INTO utilisateurs (LOGIN, HASH_MDP, NOM, SEXE, ID_NIVEAU_SPORTIF) 
+                                VALUES ('".$login."', '".$mot_de_passe."', '".$nom."', '".$sexe."', '".$id_niveau."')");
         $request->execute();
 
-        $request = $pdo->prepare("SELECT * FROM utilisateur WHERE NOM = '".$nom."' AND PRENOM = '".$prenom."'");
+        /*$request = $pdo->prepare("SELECT * FROM utilisateurs WHERE NOM = '".$nom."' AND PRENOM = '".$prenom."'");
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
 
-        return $resultat;
+        return $resultat;*/
     }
 
     function put_utilisateurs($uri, $pdo){
@@ -75,7 +79,7 @@
             $sexe = $json['SEXE'];
             $id_niveau = $json['ID_NIVEAU_SPORTIF'];
 
-            $request = $pdo->prepare("UPDATE utilisateur SET LOGIN = '".$login."', HASH_MDP = '".$h_mot_de_passe."', 
+            $request = $pdo->prepare("UPDATE utilisateurs SET LOGIN = '".$login."', HASH_MDP = '".$h_mot_de_passe."', 
             NOM = '".$nom."', PRENOM = '".$prenom."', TAILLE = '".$taille."', 
             POIDS = '".$poids."', AGE = '".$age."', SEXE = '".$sexe."', 
             ID_NIVEAU_SPORTIF = '".$id_niveau."' WHERE ID_UTILISATEUR = ".$uri[2]);
@@ -87,7 +91,7 @@
     
     function delete_utilisateurs($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("DELETE FROM utilisateur WHERE ID_UTILISATEUR = $uri[2]");
+            $request = $pdo->prepare("DELETE FROM utilisateurs WHERE ID_UTILISATEUR = $uri[2]");
             $request->execute();
         }
 

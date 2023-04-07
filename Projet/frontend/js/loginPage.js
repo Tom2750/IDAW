@@ -19,9 +19,19 @@ $(document).ready(function(){
         connexion(inputLogin, inputPw); //modifier avec hashPw
     });
 
+    $("#creerCompte").click(function() {
+        event.preventDefault();
+        const inputNom = $("#nameSignUp").val();
+        const inputLogin = $("#emailSignUp").val();
+        const inputPw = $("#pwSignUp").val();
+        const inputSexe = $("#sexeSignUp").value;
+        const inputSport = $("#sportSignUp").value;
+        var hashPw = CryptoJS.MD5(inputPw);
+        creerCompte(inputNom, inputLogin, inputPw, inputSexe, inputSport); //modifier avec hashPw
+    });
+
     function connexion(login, pwd) {
         params = `LOGIN=${login}&HASH_MDP=${pwd}`; 
-        console.log(path + `backend/api.php/utilisateurs?` + params);
         $.ajax({
             url: path + `backend/api.php/utilisateurs?` + params,
             type: "GET",
@@ -36,6 +46,37 @@ $(document).ready(function(){
               } else {
                 // Connexion échouée
                 alert("Login ou mot de passe incorrect !");
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              // Traitement de l'erreur
+              alert("Une erreur s'est produite : " + textStatus + ", " + errorThrown);
+            }
+          });
+    }
+
+    function creerCompte(nom, login, pwd, sexe, niveauSport) {
+        jsonData = {
+            "NOM": nom,
+            "LOGIN": login,
+            "HASH_MDP": pwd,
+            "SEXE": sexe,
+            "ID_NIVEAU_SPORTIF": niveauSport
+          };
+        $.ajax({
+            url: path + "backend/api.php/utilisateurs",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(jsonData),
+            contentType: "application/json; charset=utf-8",
+            success: function(response) {
+              // Traitement de la réponse de l'API
+              if (response.success) {
+                // Enregistrement réussi
+                alert("Compte créé avec succès !");
+              } else {
+                // Enregistrement échoué
+                alert("Erreur : " + response.message);
               }
             },
             error: function(jqXHR, textStatus, errorThrown) {

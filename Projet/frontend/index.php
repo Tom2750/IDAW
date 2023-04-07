@@ -8,16 +8,37 @@
         <script src="js/loginPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+        <style>
+            .box {
+                background-color: #eee;
+                border: none;
+                border-radius: 1px;
+                padding: 12px 15px;
+                margin: 8px 0;
+                width: 100%;
+            }
+        </style>
    </head>
    <body>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#" onsubmit="onSignUpFormSubmit()">
+                <form action="#">
                     <h1>Créer un compte</h1>
                     <input type="text" id="nameSignUp" placeholder="Nom" />
                     <input type="email" id="emailSignUp" placeholder="Email" />
                     <input type="password" id="pwSignUp" placeholder="Mot de passe" />
-                    <button type="submit">Créer compte</button>
+                    <select class="box" id="sexeSignUp">
+                        <option value="">Sexe :</option>
+                        <option value=1>Homme</option>
+                        <option value=2>Femme</option>
+                    </select>
+                    <select class="box" id="sportSignUp" >
+                        <option value="">Niveau sportif :</option>
+                        <option value=1>Bas</option>
+                        <option value=2>Moyen</option>
+                        <option value=3>Elevé</option>
+                    </select>
+                    <button type="submit" id="creerCompte">Créer compte</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
