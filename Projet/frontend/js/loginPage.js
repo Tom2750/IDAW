@@ -32,7 +32,7 @@ $(document).ready(function(){
                 // Connexion réussie
                 alert("Connexion réussie !");
                 window.location.href = "dashboard.php";
-                document.cookie = 'login='+response[0]['LOGIN'];
+                document.cookie = 'login='+response[0]['ID_UTILISATEUR'];
               } else {
                 // Connexion échouée
                 alert("Login ou mot de passe incorrect !");

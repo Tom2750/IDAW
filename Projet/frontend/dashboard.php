@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
+<?php
+    require_once('template_header.php');
+?>
     <link rel="stylesheet" href="css/styles_dashboard.css">
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
-            <div class="logo">
-                <img src="img/logo.png" alt="logo">
-            </div>
-            <ul class="menu">
-                <li><a href="#" class="active">Dashboard</a></li>
-                <li><a href="#">Profil</a></li>
-                <li><a href="#">Aliments</a></li>
-                <li><a href="#">Journal</a></li>
-            </ul>
-            <div class="footer">
-                <p>&copy; 2023 Dashboard. All rights reserved.</p>
-            </div>
-        </div>
+        <?php require_once('template_nav.php') ?>
 
         <div class="main-content">
             <div class="header">
