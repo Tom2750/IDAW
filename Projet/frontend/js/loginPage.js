@@ -31,7 +31,8 @@ $(document).ready(function(){
               if (!(response.length==0)) {
                 // Connexion réussie
                 alert("Connexion réussie !");
-                window.location.href = "index.php";
+                window.location.href = "dashboard.php";
+                document.cookie = 'login='+response[0]['LOGIN'];
               } else {
                 // Connexion échouée
                 alert("Login ou mot de passe incorrect !");
