@@ -24,14 +24,12 @@
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = $uri[2]");
         } else if(isset($_GET['LOGIN']) AND isset($_GET['HASH_MDP'])){
-            $json = json_decode(file_get_contents('php://input'), true);
 
             $login = $_GET['LOGIN'];
             $h_mot_de_passe = $_GET['HASH_MDP'];
 
             $request = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = '".$login."' AND HASH_MDP = '".$h_mot_de_passe."'");
         } else if(isset($_GET['LOGIN'])){
-            $json = json_decode(file_get_contents('php://input'), true);
 
             $login = $_GET['LOGIN'];
 
