@@ -14,9 +14,6 @@
             </div>
             <div class="cards">
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
                     <div class="card-info">
                         <h2>Derniers aliments ajoutés</h2>
                         <p>carotte</p>
