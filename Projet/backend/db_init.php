@@ -88,7 +88,7 @@
     $request = "CREATE TABLE IF NOT EXISTS `compositions` (
         `ID_NUTRIMENT` int NOT NULL,
         `ID_ALIMENT` int NOT NULL,
-        `RATIO` float DEFAULT NULL
+        `RATIO` float NULL DEFAULT '0'
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     $pdo->exec($request);
 
