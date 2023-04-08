@@ -1,0 +1,14 @@
+.sauvegarde {
+    color: white;
+    background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #FF416C;
+    transition: all 0.2s ease-in-out;
+  }

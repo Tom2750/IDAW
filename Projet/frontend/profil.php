@@ -3,6 +3,7 @@
     require_once('template_session.php');
 ?>  
     <link rel="stylesheet" href="css/styles_dashboard.css">
+    <link rel="stylesheet" href="css/styles_profil.css">
 </head>
 <body>
     <div class="container">
@@ -56,8 +57,7 @@
                             </select>
                     </div>
                 </div>
-
-                <button type="submit" class="edit-info-btn">Sauvegarder</button>
+                <button type="submit" class="sauvegarde">Sauvegarder</button>
             </form>
         </div>
     </div>
