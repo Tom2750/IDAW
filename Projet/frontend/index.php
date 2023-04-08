@@ -3,7 +3,6 @@
 ?>
 
         <link rel="stylesheet" href="css/styles_loginForm.css">
-        
         <script src="config.js"></script>
         <script src="js/loginPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>

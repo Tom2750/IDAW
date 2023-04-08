@@ -1,5 +1,6 @@
 <?php
     require_once('template_header.php');
+    require_once('template_session.php');
 ?>
     <link rel="stylesheet" href="css/styles_dashboard.css">
 </head>

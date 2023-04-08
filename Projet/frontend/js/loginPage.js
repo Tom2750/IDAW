@@ -42,8 +42,8 @@ $(document).ready(function(){
               if (!(response.length==0)) {
                 // Connexion réussie
                 alert("Connexion réussie !");
-                window.location.href = "dashboard.php";
-                document.cookie = 'id='+response[0]['ID_UTILISATEUR'];
+                document.cookie = 'user_id='+response[0]['ID_UTILISATEUR'];
+                window.location.href = "login.php";
                 document.getElementById("signInForm").reset();
               } else {
                 // Connexion échouée

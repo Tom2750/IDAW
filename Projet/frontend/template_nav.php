@@ -9,6 +9,7 @@
         <li><a href="#">Journal</a></li>
     </ul>
     <div class="footer">
+        <a href="logout.php">Déconnexion</a>
         <p>&copy; 2023 iMangerMieux. All rights reserved.</p>
     </div>
 </div>
