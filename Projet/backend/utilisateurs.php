@@ -86,7 +86,7 @@
             $json = json_decode(file_get_contents('php://input'), true);
             
             $login = $json['LOGIN'];
-            $h_mot_de_passe = $json['HASH_MDP'];
+            // $h_mot_de_passe = $json['HASH_MDP'];
             $nom = $json['NOM'];
             $prenom = $json['PRENOM'];
             $taille = $json['TAILLE'];
@@ -95,7 +95,7 @@
             $sexe = $json['SEXE'];
             $id_niveau = $json['ID_NIVEAU_SPORTIF'];
 
-            $request = $pdo->prepare("UPDATE utilisateurs SET LOGIN = '".$login."', HASH_MDP = '".$h_mot_de_passe."', 
+            $request = $pdo->prepare("UPDATE utilisateurs SET LOGIN = '".$login."', 
             NOM = '".$nom."', PRENOM = '".$prenom."', TAILLE = '".$taille."', 
             POIDS = '".$poids."', AGE = '".$age."', SEXE = '".$sexe."', 
             ID_NIVEAU_SPORTIF = '".$id_niveau."' WHERE ID_UTILISATEUR = ".$uri[2]);

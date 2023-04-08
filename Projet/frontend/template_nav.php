@@ -7,9 +7,7 @@
         <li><a href="profil.php">Profil</a></li>
         <li><a href="#">Aliments</a></li>
         <li><a href="#">Journal</a></li>
-    </ul>
-    <div class="footer">
-        <a href="logout.php">Déconnexion</a>
+        <li><a href="logout.php">Déconnexion</a></li>
         <p>&copy; 2023 iMangerMieux. All rights reserved.</p>
-    </div>
+    </ul>
 </div>
