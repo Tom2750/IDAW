@@ -1,32 +1,23 @@
 am5.ready(function() {
 
-/*
-    function getConsommation(, ) {
-        params = `LOGIN=${login}&HASH_MDP=${pwd}`; 
+
+    function getConsommation(id_utilisateur, date_conso) {
+        params = `ID_UTILISATEUR=${id_utilisateur}&DATE_CONSO=${date_conso}`; 
         $.ajax({
-            url: path + `backend/api.php/utilisateurs?` + params,
+            url: path + `backend/api.php/consommations?` + params,
             type: "GET",
             dataType: "json",
             success: function(response) {
-              // Traitement de la réponse de l'API
-              if (!(response.length==0)) {
-                // Connexion réussie
-                alert("Connexion réussie !");
-                window.location.href = "dashboard.php";
-                document.cookie = 'id='+response[0]['ID_UTILISATEUR'];
-                document.getElementById("signInForm").reset();
-              } else {
-                // Connexion échouée
-                alert("Login ou mot de passe incorrect !");
-                document.getElementById("signInForm").reset();
-              }
+                // Traitement de la réponse de l'API
+                alert("Liste des consos du jour");
+              
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              // Traitement de l'erreur
-              alert("Une erreur s'est produite : " + textStatus + ", " + errorThrown);
+                // Traitement de l'erreur
+                alert("Une erreur s'est produite : " + textStatus + ", " + errorThrown);
             }
           });
-    }*/
+    }
 
 
 

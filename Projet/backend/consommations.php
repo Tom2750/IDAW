@@ -22,16 +22,13 @@
 
     function get_consommations($uri, $pdo){
         if(!empty($uri[2])) {
-            $request = $pdo->prepare("SELECT * FROM consommations WHERE id_conso = $uri[2]");
-        } else {
-            $json = json_decode(file_get_contents('php://input'), true);
-
-            $id_utilisateur = $json['ID_UTILISATEUR'];
-            $date_debut = $json['DATE_DEBUT'];
-            $date_fin = $json['DATE_FIN'];
+            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_CONSO = $uri[2]");
+        } else if(isset($GET_['ID_UTILISATEUR']) && isset($_GET['DATE_CONSO'])){
             
-            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_CONSO = ".$id_utilisateur." 
-            AND DATE_CONSO > '".$date_debut."' AND DATE_CONSO < '".$date_fin."' ORDER BY ID_UTILISATEUR ASC");
+            $date_conso = $_GET['DATE_CONSO'];
+            $id_utilisateur = $_GET['ID_UTILISATEUR'];
+            
+            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_UTILISATEUR = $id_utilisateur AND DATE_CONSO = $date_conso ORDER BY DATE_CONSO ASC");
 
         }
         $request->execute();
