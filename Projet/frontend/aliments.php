@@ -4,6 +4,7 @@
 ?>
     <link rel="stylesheet" href="css/styles_dashboard.css">
     <link rel="stylesheet" href="css/styles_aliments.css">
+    <link rel="stylesheet" href="css/styles_journal.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <script>
         var sessionId = <?php echo $_SESSION['user_id']; ?>;
