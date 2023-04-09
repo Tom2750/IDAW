@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         columns: [
             { title: "ID_CONSO", data: "ID_CONSO" },
-            { title: "ID_ALIMENT", data: "ID_ALIMENT" },
+            { title: "ALIMENT", data: "NOM_ALIMENT" },
             { title: "QUANTITE", data: "QUANTITE" },
             { title: "DATE_CONSO", data: "DATE_CONSO" }
         ]
@@ -25,20 +25,45 @@ $(document).ready(function () {
         success: function(data) {
             var formattedData = [];
 
-            // Formatage des données pour DataTable
-            for (var i = 0; i < data.length; i++) {
-                var row = {
-                    ID_CONSO: data[i]['ID_CONSO'],
-                    ID_ALIMENT: data[i]['ID_ALIMENT'],
-                    QUANTITE: data[i]['QUANTITE'],
-                    DATE_CONSO: data[i]['DATE_CONSO']
-                };
+            getNomAliment(function(nomAliments) {
+                // Formatage des données pour DataTable
+                for (var i = 0; i < data.length; i++) {
+                    var aliment = nomAliments.find(a => a.ID_ALIMENT === data[i].ID_ALIMENT);
+                    var row = {
+                        ID_CONSO: data[i]['ID_CONSO'],
+                        NOM_ALIMENT: aliment ? aliment.NOM_ALIMENT : "N/A",
+                        QUANTITE: data[i]['QUANTITE'],
+                        DATE_CONSO: data[i]['DATE_CONSO']
+                    };
 
-                formattedData.push(row);
-            }
+                    formattedData.push(row);
+                }
 
-            // Remplissage de la DataTable avec les données
-            table.rows.add(formattedData).draw();
+                // Remplissage de la DataTable avec les données
+                table.rows.add(formattedData).draw();
+            });
         }
     });
+
+    function getNomAliment(callback) {
+        $.ajax({
+        
+            url: path + "backend/api.php/aliments",
+            type: "GET",
+            success: function(data) {
+                var formattedData = [];
+    
+                // Formatage des données pour DataTable
+                for (var i = 0; i < data.length; i++) {
+                    var row = {
+                        ID_ALIMENT: data[i]['ID_ALIMENT'],
+                        NOM_ALIMENT: data[i]['NOM_ALIMENT']
+                    };
+    
+                    formattedData.push(row);
+                }
+                callback(formattedData);
+            }
+        });
+    }
 });
