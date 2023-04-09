@@ -95,33 +95,32 @@
         });
     }
 
-        function onFormSubmit() {
-            event.preventDefault();
-            var jsonData = {
-                "LOGIN": $("#login").val(),
-                "NOM": $("#nom").val(),
-                "PRENOM": $("#prenom").val(),
-                "TAILLE": $("#taille").val(),
-                "POIDS": $("#poids").val(),
-                "AGE": $("#age").val(),
-                "SEXE": $("#sexe").val(),
-                "ID_NIVEAU_SPORTIF": $("#niveau_sportif").val(),
-            };
+    function onFormSubmit() {
+        event.preventDefault();
+        var jsonData = {
+            "LOGIN": $("#login").val(),
+            "NOM": $("#nom").val(),
+            "PRENOM": $("#prenom").val(),
+            "TAILLE": $("#taille").val(),
+            "POIDS": $("#poids").val(),
+            "AGE": $("#age").val(),
+            "SEXE": $("#sexe").val(),
+            "ID_NIVEAU_SPORTIF": $("#niveau_sportif").val(),
+        };
 
-            $.ajax({
-                url: path + "backend/api.php/utilisateurs/" + <?php echo $_SESSION['user_id'] ?>,
-                method: 'PUT',
-                dataType: 'json',
-                data: JSON.stringify(jsonData),
-                contentType: "application/json; charset=utf-8",
-            })
-            .done(function(response){
-                getAllUtilisateurs();
-                afficheInfosUtilisateur();
-            })
-            .fail(function(error){
-                alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-            })
+        $.ajax({
+            url: path + "backend/api.php/utilisateurs/" + <?php echo $_SESSION['user_id'] ?>,
+            method: 'PUT',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            contentType: "application/json; charset=utf-8",
+        })
+        .done(function(response){
+            afficheInfosUtilisateur();
+        })
+        .fail(function(error){
+            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        })
     }
 
     $(document).ready(function(){
