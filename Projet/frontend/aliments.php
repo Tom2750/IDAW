@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-info">
                         <h2>Ajouter un aliment</h2>
-                        <form onsubmit="ajoutAliment();">
+                        <form id="alimentForm">
                             <div class="form-group row">
                                 <label>Nom de l'aliment</label>
                                 <input type="text" id="nom_aliment">
@@ -32,20 +32,20 @@
                                 </select>
                             </div>
                             <br>
-                            <button type="submit" class="ajout">Ajouter</button>
+                            <button type="submit" id="ajoutAliment" class="ajout">Ajouter</button>
                         </form>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-info">
                         <h2>Ajouter un type</h2>
-                        <form onsubmit="ajoutType();">
+                        <form id="typeForm">
                             <div class="form-group row">
                                 <label>Nom du type</label>
                                 <input type="text" id="nom_type">
                             </div>
                             <br>
-                            <button type="submit" class="ajout">Ajouter</button>
+                            <button type="submit" id="ajoutType" class="ajout">Ajouter</button>
                         </form>
                     </div>
                 </div>
@@ -69,6 +69,18 @@
 <script>
 
     <?php require_once('config.js'); ?>
+
+    $("#ajoutAliment").click(function() {
+        event.preventDefault();
+        ajoutAliment();
+        document.getElementById("alimentForm").reset();
+    });
+
+    $("#ajoutType").click(function() {
+        event.preventDefault();
+        ajoutType();
+        document.getElementById("typeForm").reset();
+    });
 
     function ajoutAliment() {
         event.preventDefault();

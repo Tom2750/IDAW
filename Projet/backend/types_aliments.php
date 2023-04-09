@@ -24,7 +24,7 @@
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM types_aliments WHERE id_type = $uri[2]");
         } else {
-            $request = $pdo->prepare("SELECT * FROM types_aliments ORDER BY id_type ASC");
+            $request = $pdo->prepare("SELECT * FROM types_aliments ORDER BY NOM ASC");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
@@ -36,11 +36,11 @@
 
         $nom = $json['NOM'];
 
-        $request = $pdo->prepare("INSERT INTO types_aliments (NOM) VALUES ('".$nom."')");
-        $request->execute();
+        $request = $pdo->prepare("INSERT INTO types_aliments (NOM) VALUES (:nom)");
+        $request->execute([':nom' => $nom]);
 
-        $request = $pdo->prepare("SELECT * FROM types_aliments WHERE NOM = '".$nom."'");
-        $request->execute();
+        $request = $pdo->prepare("SELECT * FROM types_aliments WHERE NOM = :nom");
+        $request->execute([':nom' => $nom]);
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
         return $resultat;
     }

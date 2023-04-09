@@ -24,7 +24,7 @@
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM aliments WHERE id_aliment = $uri[2]");
         } else {
-            $request = $pdo->prepare("SELECT * FROM aliments ORDER BY id_aliment ASC");
+            $request = $pdo->prepare("SELECT * FROM aliments ORDER BY NOM_ALIMENT ASC");
         }
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
