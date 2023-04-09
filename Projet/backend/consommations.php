@@ -23,14 +23,21 @@
     function get_consommations($uri, $pdo){
         if(!empty($uri[2])) {
             $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_CONSO = $uri[2]");
-        } else /*if(isset($GET_['ID_UTILISATEUR']) AND isset($_GET['DATE_CONSO']))*/{
-            
-            $date_conso = $_GET['DATE_CONSO'];
-            $id_utilisateur = $_GET['ID_UTILISATEUR'];
-            
-            $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_UTILISATEUR = '".$id_utilisateur."' AND DATE_CONSO = '".$date_conso."' ORDER BY DATE_CONSO ASC");
-
-        }
+        }  else {
+            if(isset($_GET['ID_UTILISATEUR'])){
+                if(isset($_GET['DATE_CONSO'])){
+                    $date_conso = $_GET['DATE_CONSO'];
+                    $id_utilisateur = $_GET['ID_UTILISATEUR'];
+                    
+                    $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_UTILISATEUR = '".$id_utilisateur."' AND DATE_CONSO = '".$date_conso."' ORDER BY DATE_CONSO ASC");
+                }
+                else {
+                    $id_utilisateur = $_GET['ID_UTILISATEUR'];
+                    $request = $pdo->prepare("SELECT * FROM consommations WHERE ID_UTILISATEUR = '".$id_utilisateur."' ORDER BY DATE_CONSO ASC");
+                }
+            }
+    
+        } 
         $request->execute();
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);
         return $resultat;
