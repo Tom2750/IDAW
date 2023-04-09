@@ -3,6 +3,20 @@
     require_once('template_session.php');
 ?>
     <link rel="stylesheet" href="css/styles_dashboard.css">
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="config.js"></script>
+    <script>
+        var sessionId = <?php echo $_SESSION['user_id']; ?>;
+    </script>
+    <script src="js/camembert.js"></script>
+    <style>
+        #chartdiv {
+        width: 100%;
+        height: 500px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -57,6 +71,7 @@
                     <canvas id="sales-chart"></canvas>
                 </div>
             </div>
+            <div id="chartdiv"></div>
         </div>
     </div>
 </body>
