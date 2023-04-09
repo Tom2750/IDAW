@@ -1,124 +1,67 @@
-$("#ajoutAliment").click(function() {
-    event.preventDefault();
-    ajoutAliment();
-});
+$(document).ready(function () {
+    var table = $('#table-consommations').DataTable({
+        language: {
+            url: "http://cdn.datatables.net/plug-ins/1.10.9/i18n/French.json"
+        },
 
-$("#ajoutType").click(function() {
-    event.preventDefault();
-    console.log("coucou");
-    const nomType = $("#nom_type").val();
-    console.log(nomType);
-    ajoutType(nomType);
-});
+        pagingType: "full_numbers",
+        lengthMenu: [5,10,15,20,25],
+        pageLength: 3,
 
-function ajoutAliment() {
-    event.preventDefault();
-    var jsonData = {
-        "NOM_ALIMENT": $("#nom_aliment").val(),
-        "ID_TYPE": $("#type").val(),
-    };
+        columns: [
+            { title: "ID_ALIMENT", data: "ID_ALIMENT" },
+            { title: "NOM_ALIMENT", data: "NOM_ALIMENT" },
+            { title: "TYPE", data: "TYPE" },
+        ]
+    });
+
 
     $.ajax({
-        url: path + "backend/api.php/aliments/",
-        method: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        contentType: "application/json; charset=utf-8",
-    })
-    .done(function(response){
-        getAliments();
-    })
-    .fail(function(error){
-        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-    })
-}
-
-function afficheAliments() {
-    event.preventDefault();
-    // Ajout des entêtes du tableau
-    let headers = ['ID_ALIMENT', 'NOM_ALIMENT', 'ID_TYPE'];
-    let headerRow = '<tr>';
-    headers.forEach(function(header) {
-        headerRow += '<th>' + header + '</th>';
-    });
-    headerRow += '</tr>';
-    $("#studentsTableHead").append(headerRow);
-
-    // Ajout des lignes du tableau
-    $aliments.forEach(function(aliment) {
-        let row = '<tr>';
-        row += '<td>' + aliment.ID_ALIMENT + '</td>';
-        row += '<td>' + aliment.NOM_ALIMENT + '</td>';
-        row += '<td>' + aliment.ID_TYPE + '</td>';
-        row += '</tr>';
-        $("#studentsTableBody").append(row);
-    });
-}
-
-function getAliments() {
-    $.ajax({
+        
         url: path + "backend/api.php/aliments",
-        method: 'GET',
-        dataType: 'json',
-    })
-    .done(function(response){
-        $aliments = response;
-        afficheAliments();
-    })
-    .fail(function(error){
-        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+        type: "GET",
+        success: function(data) {
+            var formattedData = [];
+
+            getType(function(nomType) {
+                // Formatage des données pour DataTable
+                for (var i = 0; i < data.length; i++) {
+                    var type = nomType.find(a => a.ID_TYPE === data[i].ID_TYPE);
+                    var row = {
+                        ID_ALIMENT: data[i]['ID_ALIMENT'],
+                        NOM_ALIMENT: data[i]['NOM_ALIMENT'],
+                        TYPE: type ? type.NOM_TYPE : "N/A"
+                    };
+
+                    formattedData.push(row);
+                }
+
+                // Remplissage de la DataTable avec les données
+                table.rows.add(formattedData).draw();
+            });
+        }
     });
-}
 
-function ajoutType(nomType){
-    event.preventDefault();
-    var jsonData = {
-        "NOM": nomType
-    }
 
-    $.ajax({
-        url: path + "backend/api.php/types_aliments/",
-        method: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(jsonData),
-        contentType: "application/json; charset=utf-8",
-    })
-    .done(function(response){
-        alert("OK");
-        console.log(response);
-        getTypes();
-    })
-    .fail(function(error){
-        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-    })
-}
-
-function afficheTypes() {
-    event.preventDefault();
-    $("#type").empty();
-    $("#type").append('<option value="">--Choisissez une option--</option>');
-    $types.forEach(function(type) {
-        $("#type").append('<option value="' + type.ID_TYPE + '">' + type.NOM + '</option>');
-    });
-}
-
-function getTypes() {
-    $.ajax({
-        url: path + "backend/api.php/types_aliments",
-        method: 'GET',
-        dataType: 'json',
-    })
-    .done(function(response){
-        $types = response;
-        afficheTypes();
-    })
-    .fail(function(error){
-        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-    });
-}
-
-$(document).ready(function(){
-    getAliments();
-    getTypes();
-    // $('#dataTable').DataTable();
+    function getType(callback) {
+        $.ajax({
+        
+            url: path + "backend/api.php/types_aliments",
+            type: "GET",
+            success: function(data) {
+                var formattedData = [];
+    
+                // Formatage des données pour DataTable
+                for (var i = 0; i < data.length; i++) {
+                    var row = {
+                        ID_TYPE: data[i]['ID_TYPE'],
+                        NOM_TYPE: data[i]['NOM']
+                    };
+    
+                    formattedData.push(row);
+                }
+                callback(formattedData);
+            }
+        });
+    }   
 });

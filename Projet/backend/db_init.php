@@ -153,6 +153,21 @@
         $request->execute();
     }   
 
+    $file = fopen('sql\consommations.csv', "r");
+    while (($row = fgetcsv($file)) !== FALSE) {
+        $request = $pdo->prepare("
+                                INSERT INTO consommations (ID_UTILISATEUR, ID_ALIMENT, QUANTITE, DATE_CONSO) 
+                                VALUES (:id_utilisateur, :id_aliment, :quantite, :date_conso)");
+        $request->bindParam(':id_utilisateur', $row[1]);
+        $request->bindParam(':id_aliment', $row[2]);
+        $request->bindParam(':quantite', $row[3]);
+        $request->bindParam(':date_conso', $row[4]);
+
+        $request->execute();
+    }  
+
+
+
     $file = fopen('sql\nutriments.csv', "r");
     while (($row = fgetcsv($file)) !== FALSE) {
         $request = $pdo->prepare("
