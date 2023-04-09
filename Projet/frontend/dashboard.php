@@ -28,53 +28,47 @@
             </div>
             <div class="cards">
                 <div class="card">
-                    <div class="card-info">
-                        <h2>Derniers aliments ajoutés</h2>
-                        <p>carotte</p>
-                    </div>
+                    <h2 id="bienvenue"></h2>
                 </div>
                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="card-info">
-                        <h2>Calories consommées ajd</h2>
-                        <p>Bouton pour changer 1j, 7j,...</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <div class="card-info">
-                        <h2>Encore des trucs</h2>
-                        <p>trucs</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <div class="card-info">
-                        <h2>Sales</h2>
-                        <p>$32,584</p>
-                    </div>
+                    <h2>Ce que vous avez consommés aujourd'hui</h2>
+                    <div></div>
+                    <div id="chartdiv"></div>
                 </div>
             </div>
-            <div class="charts">
-                <div class="chart">
-                    <h2>Orders</h2>
-                    <canvas id="orders-chart"></canvas>
-                </div>
-                <div class="chart">
-                    <h2>Sales</h2>
-                    <canvas id="sales-chart"></canvas>
-                </div>
-            </div>
-            <div id="chartdiv"></div>
         </div>
     </div>
 
 <?php
     require_once('template_footer.php');
 ?>
+
+<script>
+    $(document).ready(function(){
+        getInfosUtilisateur();
+    });
+    
+    
+    function getInfosUtilisateur() {
+    $.ajax({
+        url: path + "backend/api.php/utilisateurs/" + sessionId,
+        method: 'GET',
+        dataType: 'json',
+    })
+    .done(function(response){
+        $infos = response;
+        document.getElementById("bienvenue").innerHTML = "Bienvenue " + $infos[0]['PRENOM'] + " !";
+    })
+    .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    });
+
+    function getConsos() {
+
+    }
+
+    function afficheConsos() {
+        
+    }
+}
+</script>

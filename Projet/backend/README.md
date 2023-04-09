@@ -2,21 +2,21 @@ Documentation de l'api :
 
 /aliments
     GET: renvoie tous les aliments
-    POST: ajoute un aliment avec les valeurs fournies dans le corps de la requête
+    POST: ajoute un aliment avec les valeurs NOM_ALIMENT et ID_TPE dans le corps de la requete
 
 /aliments/{id}
     GET: renvoie l'aliment d'id {id}
-    PUT: modifie l'aliment d'id {id} avec les valeurs fournies dans le corps de la requête
+    PUT: modifie l'aliment d'id {id} avec les valeurs NOM_ALIMENT et ID_TPE dans le corps de la requete
     DELETE: supprime l'aliment d'id {id}
 
 
 /utilisateurs
-    GET: renvoie l'utilisateur dont le login et le mot de passe sont dans l'url
-    POST: ajoute un utilisateur avec les valeurs fournies dans le corps de la requête
+    GET: renvoie l'utilisateur dont le login LOGIN et le mot de passe HASH_MDP sont dans l'url
+    POST: ajoute un utilisateur avec les valeurs LOGIN, HASH_MDP, SEXE, ID_NIVEAU_SPORTIF fournies dans le corps de la requête
 
 /utilisateurs/{id}
     GET: renvoie l'utilisateur d'id {id}
-    PUT: modifie l'utilisateur d'id {id} avec les valeurs fournies dans le corps de la requête
+    PUT: modifie l'utilisateur d'id {id} avec les LOGIN, NOM, PRENOM, TAILLE, POIDS, AGE, SEXE, ID_NIVEAU_SPORTIF fournies dans le corps de la requête
     DELETE: supprime l'utilisateur d'id {id}
 
 
@@ -31,11 +31,11 @@ Documentation de l'api :
 
 
 /consommations
-    GET: renvoie toutes les consommations d'un utilisateur sur une période, valeur dans la requête     // a modifier
+    GET: renvoie toutes les consommations d'un utilisateur ID_UTILISATEUR à la date DATE_CONSO, valeurs dans l'url
     POST: ajoute une consommation avec les valeurs dans la requete
 
 /consommations/{id}
-    GET: renvoie la consommation d'id {id}                                                              // a modifier
+    GET: renvoie la consommation d'id {id}
     PUT: modifie la consommation d'id {id} avec les valeurs dans la requete
     DELETE: supprime la conso d'id {id}
 
