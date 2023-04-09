@@ -4,10 +4,13 @@
 ?>
     <link rel="stylesheet" href="css/styles_dashboard.css">
     <link rel="stylesheet" href="css/styles_aliments.css">
-    <!-- datatable -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <script>
+        var sessionId = <?php echo $_SESSION['user_id']; ?>;
+    </script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="config.js"></script>
+    <script src="js/alimentPage.js"></script>
     
 
 </head>
@@ -52,10 +55,16 @@
                 <div class="card">
                     <div class="card-info">
                         <h2>Aliments</h2>
-                        <table id="dataTable">
-                            <thead id=studentsTableHead>
+                        <table id="table-consommations" class="display">
+                            <caption>Consommations</caption>
+                            <thead>
+                                <tr>
+                                    <th>ID_ALIMENT</th>
+                                    <th>NOM_ALIMENT</th>
+                                    <th>TYPE</th>
+                                </tr>
                             </thead>
-                            <tbody id="studentsTableBody">
+                            <tbody>
                             </tbody>
                         </table>
                     </div>

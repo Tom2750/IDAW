@@ -10,7 +10,6 @@
         var sessionId = <?php echo $_SESSION['user_id']; ?>;
     </script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-  
     <script src="config.js"></script>
     <script src="js/journalPage.js"></script>
 
