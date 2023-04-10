@@ -58,12 +58,3 @@ Documentation de l'api :
     GET: renvoie le type d'aliment d'id {id}
     PUT: modifie le type d'aliment d'id {id} avec les valeurs fournies dans le corps de la requête
     DELETE: supprime le type d'aliment d'id {id}
-
-
-
-
-
-
-- id_micro_nutriment => id_nutriment x2
-- doublons compositions
-- consommation avec un s

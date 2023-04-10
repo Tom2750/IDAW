@@ -15,10 +15,9 @@ async function getConsommations(id_utilisateur, date_conso) {
                 id_nutriment: 17,
                 unité: parseFloat(response[i]['QUANTITE'])
             });
-            liste_nutriment.push(nutriments); //bonne valeur
-            //quantité += parseFloat(response[i]['QUANTITE']);
+            liste_nutriment.push(nutriments);
         }
-        conso = additionnerNutriments(liste_nutriment); //bonne valeur
+        conso = additionnerNutriments(liste_nutriment);
         return conso;
     } catch (error) {
         // Traitement de l'erreur
@@ -26,7 +25,6 @@ async function getConsommations(id_utilisateur, date_conso) {
     }
   }
   
-  //Récupère bon nutriments dans getConsommation()
   function getNutriments(id_aliment, quantité){
     return new Promise(function(resolve, reject) {
       $.ajax({
@@ -122,7 +120,12 @@ function findNutriment(tableau, nutrimentId){
   
   async function main() {
     try {
-        const conso = await getConsommations(sessionId, '2023-04-08'); //modifier avec date du jour
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+        const conso = await getConsommations(sessionId, formattedDate);
         prepareData(conso);
 
         am5.ready(function() {
