@@ -15,6 +15,13 @@ Si un problème est rencontré lors de l'utilisation de db_init, il reste toujou
 Il suffit de modifier le fichier config.js présent dans le dossier frontend avec le chemin souhaité.
 
 
+--------Compte admin--------
+
+Afin de vous faciliter la tâche, nous vous avons créé un compte admin afin de pouvoir tester au mieux les fonctionnalités de l'application.
+Login : admin
+Mot de passe : admin
+
+
 
 
 Réalisé par Julien FREMAUX et Tom NGUYEN-CADORET
