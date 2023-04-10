@@ -9,10 +9,10 @@ $(document).ready(function () {
         pageLength: 3,
 
         columns: [
-            { title: "ID_CONSO", data: "ID_CONSO" },
+            { title: "IDENTIFIANT CONSOMMATION", data: "ID_CONSO" },
             { title: "ALIMENT", data: "NOM_ALIMENT" },
-            { title: "QUANTITE", data: "QUANTITE" },
-            { title: "DATE_CONSO", data: "DATE_CONSO" }
+            { title: "QUANTITE (en gramme)", data: "QUANTITE" },
+            { title: "DATE DE CONSOMMATION", data: "DATE_CONSO" }
         ]
     });
 

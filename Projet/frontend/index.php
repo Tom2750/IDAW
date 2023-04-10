@@ -4,9 +4,9 @@
 
         <link rel="stylesheet" href="css/styles_loginForm.css">
         <script src="config.js"></script>
-        <script src="js/loginPage.js"></script>
+        <script src="js/connectPage.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha1.js"></script>
         <style>
             .box {
                 background-color: #eee;
@@ -44,7 +44,6 @@
                     <h1>Se connecter</h1>
                     <input type="email" id="emailSignIn" placeholder="Email" />
                     <input type="password" id="pwSignIn" placeholder="Mot de passe" />
-                    <a href="#">Mot de passe oublié ?</a>
                     <button type="submit" id="connexion">Connexion</button>
                 </form>
             </div>

@@ -26,6 +26,12 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-info">
+                        <h2>Aliments</h2>
+                        <table id="table-consommations" class="display"></table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-info">
                         <h2>Ajouter un aliment</h2>
                         <form id="alimentForm">
                             <div class="form-group row">
@@ -53,23 +59,6 @@
                         </form>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-info">
-                        <h2>Aliments</h2>
-                        <table id="table-consommations" class="display">
-                            <caption>Consommations</caption>
-                            <thead>
-                                <tr>
-                                    <th>ID_ALIMENT</th>
-                                    <th>NOM_ALIMENT</th>
-                                    <th>TYPE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -79,128 +68,94 @@
 ?>
 
 <script>
-
-    <?php require_once('config.js'); ?>
-
     $("#ajoutAliment").click(function() {
-        event.preventDefault();
-        ajoutAliment();
-        document.getElementById("alimentForm").reset();
-    });
+    event.preventDefault();
+    ajoutAliment();
+    document.getElementById("alimentForm").reset();
+});
 
-    $("#ajoutType").click(function() {
-        event.preventDefault();
-        ajoutType();
-        document.getElementById("typeForm").reset();
-    });
+$("#ajoutType").click(function() {
+    event.preventDefault();
+    ajoutType();
+    document.getElementById("typeForm").reset();
+});
 
-    function ajoutAliment() {
-        event.preventDefault();
-        var jsonData = {
-            "NOM_ALIMENT": $("#nom_aliment").val(),
-            "ID_TYPE": $("#type").val(),
-        };
-
-        $.ajax({
-            url: path + "backend/api.php/aliments/",
-            method: 'POST',
-            dataType: 'json',
-            data: JSON.stringify(jsonData),
-            contentType: "application/json; charset=utf-8",
-        })
-        .done(function(response){
-            getAliments();
-        })
-        .fail(function(error){
-            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-        })
+function ajoutAliment() {
+    event.preventDefault();
+    if($("#nom_aliment").val() == "" || $("#type").val() == "") {
+        alert("Un nom d'aliment et un type sont nécessaires !");
+        return;
     }
-    
-    function afficheAliments() {
-        event.preventDefault();
-        // Ajout des entêtes du tableau
-        let headers = ['ID_ALIMENT', 'NOM_ALIMENT', 'ID_TYPE'];
-        let headerRow = '<tr>';
-        headers.forEach(function(header) {
-            headerRow += '<th>' + header + '</th>';
-        });
-        headerRow += '</tr>';
-        $("#studentsTableHead").append(headerRow);
+    var jsonData = {
+        "NOM_ALIMENT": $("#nom_aliment").val(),
+        "ID_TYPE": $("#type").val(),
+    };
 
-        // Ajout des lignes du tableau
-        $aliments.forEach(function(aliment) {
-            let row = '<tr>';
-            row += '<td>' + aliment.ID_ALIMENT + '</td>';
-            row += '<td>' + aliment.NOM_ALIMENT + '</td>';
-            row += '<td>' + aliment.ID_TYPE + '</td>';
-            row += '</tr>';
-            $("#studentsTableBody").append(row);
-        });
+    $.ajax({
+        url: path + "backend/api.php/aliments/",
+        method: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+    })
+    .done(function(response){
+
+    })
+    .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    })
+}
+
+function ajoutType(){
+    event.preventDefault();
+    if($("#nom_type").val() == "") {
+        alert("Un nom de type est nécessaire !");
+        return;
     }
+    var jsonData = {
+        "NOM": $("#nom_type").val()
+    };
 
-    function getAliments() {
-        $.ajax({
-            url: path + "backend/api.php/aliments",
-            method: 'GET',
-            dataType: 'json',
-        })
-        .done(function(response){
-            $aliments = response;
-            afficheAliments();
-        })
-        .fail(function(error){
-            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-        });
-    }
-
-    function ajoutType(){
-        event.preventDefault();
-        var jsonData = {
-            "NOM": $("#nom_type").val()
-        };
-
-        $.ajax({
-            url: path + "backend/api.php/types_aliments/",
-            method: 'POST',
-            dataType: 'json',
-            data: JSON.stringify(jsonData),
-            contentType: "application/json; charset=utf-8",
-        })
-        .done(function(response){
-            getTypes();
-        })
-        .fail(function(error){
-            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-        })
-    }
-
-    function afficheTypes() {
-        event.preventDefault();
-        $("#type").empty();
-        $("#type").append('<option value="">--Choisissez une option--</option>');
-        $types.forEach(function(type) {
-            $("#type").append('<option value="' + type.ID_TYPE + '">' + type.NOM + '</option>');
-        });
-    }
-
-    function getTypes() {
-        $.ajax({
-            url: path + "backend/api.php/types_aliments",
-            method: 'GET',
-            dataType: 'json',
-        })
-        .done(function(response){
-            $types = response;
-            afficheTypes();
-        })
-        .fail(function(error){
-            alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-        });
-    }
-
-    $(document).ready(function(){
-        getAliments();
+    $.ajax({
+        url: path + "backend/api.php/types_aliments/",
+        method: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=utf-8",
+    })
+    .done(function(response){
         getTypes();
-        // $('#dataTable').DataTable();
+    })
+    .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    })
+}
+
+function afficheTypes() {
+    event.preventDefault();
+    $("#type").empty();
+    $("#type").append('<option value="">--Choisissez une option--</option>');
+    $types.forEach(function(type) {
+        $("#type").append('<option value="' + type.ID_TYPE + '">' + type.NOM + '</option>');
     });
+}
+
+function getTypes() {
+    $.ajax({
+        url: path + "backend/api.php/types_aliments",
+        method: 'GET',
+        dataType: 'json',
+    })
+    .done(function(response){
+        $types = response;
+        afficheTypes();
+    })
+    .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    });
+}
+
+$(document).ready(function () {
+    getTypes();
+});
 </script>

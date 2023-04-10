@@ -16,18 +16,17 @@ $(document).ready(function(){
         event.preventDefault();
         const inputLogin = $("#emailSignIn").val();
         const inputPw = $("#pwSignIn").val();
-        var hashPw = CryptoJS.MD5(inputPw);
+        //var hashPw = CryptoJS.MD5(inputPw);
         connexion(inputLogin, inputPw); //modifier avec hashPw
     });
 
     $("#creerCompte").click(function() {
         event.preventDefault();
-        const inputNom = $("#nameSignUp").val();
         const inputLogin = $("#emailSignUp").val();
         const inputPw = $("#pwSignUp").val();
         const inputSexe = $("#sexeSignUp").val();
         const inputSport = $("#sportSignUp").val();
-        var hashPw = CryptoJS.MD5(inputPw);
+        //var hashPw = CryptoJS.MD5(inputPw);
         creerCompte(inputLogin, inputPw, inputSexe, inputSport); //modifier avec hashPw
     });
 
@@ -59,6 +58,10 @@ $(document).ready(function(){
     }
 
     function creerCompte(login, pwd, sexe, niveauSport) {
+      if($("#emailSignUp").val() == "" || $("#pwSignUp").val() == "" || $("#sexeSignUp").val() == "" || $("#sportSignUp").val() == ""){
+        alert("Un nom, un email valide et le mot de passe sont nécessaires !")
+        return;
+      }
         var jsonData = {
             "LOGIN": login,
             "HASH_MDP": pwd,
@@ -123,4 +126,3 @@ $(document).ready(function(){
 
 
 });
-
